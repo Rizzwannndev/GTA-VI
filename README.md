@@ -1,16 +1,66 @@
-# React + Vite
+# GTA VI - Interactive Landing Page
+![GTA VI Landing Page](./snapshot.png)
+A stunning interactive landing page for Grand Theft Auto VI built with React, Vite, and GSAP animations. This project showcases modern web development techniques with cutting-edge animation libraries and responsive design principles.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
 
-Currently, two official plugins are available:
+- **Smooth Animations**: GSAP-powered animations including timeline sequences, scaling, rotation, and opacity effects
+- **Interactive UI**: Mouse-tracking parallax effects and dynamic content reveals
+- **Responsive Design**: Tailwind CSS for modern, responsive styling
+- **SVG Masking**: Creative intro animation with SVG text masking
+- **Custom Scrollbar**: Gradient-styled scrollbar with smooth animations
+- **Modern Stack**: React 18 + Vite for fast development and optimized builds
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## React Compiler
+- **React** - UI framework
+- **Vite** - Build tool with HMR
+- **GSAP** - Advanced animations
+- **Tailwind CSS** - Utility-first styling
+- **Remix Icon** - Icon library
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting Started
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Node.js (v14+)
+- npm or yarn
+
+### Installation
+
+```bash
+git clone https://github.com/Rizzwannndev/GTA-VI-.git
+cd GTA-VI-
+npm install
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+## Project Structure
+
+```
+src/
+├── App.jsx          # Main component with animations
+├── index.css        # Global styles and custom scrollbar
+└── assets/          # Images and fonts
+```
+
+## Customization
+
+- Modify animation timings in `App.jsx` GSAP configurations
+- Update colors and styling in `index.css` and Tailwind classes
+- Replace placeholder images in the `public` folder
+
+## License
+
+This project is open source and available under the MIT License.
