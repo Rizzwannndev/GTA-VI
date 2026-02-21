@@ -53,3 +53,28 @@ img {
   -ms-user-select: none;
   pointer-events: none; /* optional */
 }
+.btn{
+    color: #000;
+    border: 2px solid #f0b100;
+    padding: 12px 70px;
+    border-radius: 6px;
+    position: relative;
+    z-index: 1;
+}
+.btn::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    height: 100%;
+    width: 0%;
+    z-index: -1;
+    transition: .3s ;
+}
+.btn:hover::before{
+    width: 100%;
+}
+.btn:hover{
+    color: #f0b100;
+}

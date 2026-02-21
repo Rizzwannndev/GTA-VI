@@ -170,7 +170,7 @@ function App() {
                 <p className="mt-2 text-[15px] font-[Poppins]">
                   Step into a gripping crime story filled with high-stakes heists, fast cars, underground deals, and unpredictable encounters. With cutting-edge visuals, dynamic weather systems, and a living, breathing world reacting to your every move, GTA 6 pushes the boundaries of what an open-world game can be.
                 </p>
-                <button className="bg-yellow-500 px-16 py-5 text-black mt-10 text-2xl">
+                <button className="btn bg-yellow-500 px-16 py-5 text-black mt-10 text-2xl">
                   Download Now
                 </button>
             </div>
