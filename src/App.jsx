@@ -48,8 +48,8 @@ function App() {
   
   gsap.fromTo(
   ".characters",
-    { scale: 1.9, rotate: -10},
-    {scale: 0.82, rotate: 0, duration: 2, delay: -1, ease: "expo.inOut"}
+    { scale: 1.9, rotate: -10, opacity: 0},
+    {scale: 0.82, rotate: 0, opacity: 1, duration: 2, delay: -1, ease: "expo.inOut"}
   );
   
   gsap.fromTo(
