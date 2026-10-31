@@ -12,6 +12,7 @@ import Footer from "./components/layout/Footer";
 import Grain from "./components/layout/Grain";
 import PageTransition from "./components/layout/PageTransition";
 import Preloader from "./components/layout/Preloader";
+import Cursor from "./components/layout/Cursor";
 import VideoModal from "./components/video/VideoModal";
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
       <PageTransition />
       {booting && <Preloader handoff={handoff} onReveal={() => stage.set({ revealed: true })} onDone={() => setBooting(false)} />}
       <Grain />
+      <Cursor />
     </VideoProvider>
   );
 }

@@ -678,6 +678,111 @@
   height: auto;
 }
 
+/* ---------- Custom cursor ---------- */
+/* Only hidden once the cursor script has mounted; text fields keep the caret
+   and embedded players keep their own pointer. */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+html.has-cursor :is(input, textarea, [contenteditable]) {
+  cursor: text !important;
+}
+html.has-cursor :is(iframe, select) {
+  cursor: auto !important;
+}
+.cursor {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: difference;
+  transition: opacity 0.3s ease;
+}
+.cursor.is-visible {
+  opacity: 1;
+}
+.cursor[data-mode="none"] {
+  opacity: 0;
+}
+.cursor.has-label {
+  mix-blend-mode: normal;
+}
+.cursor__dot,
+.cursor__ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.cursor__dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: #fff;
+  transition: opacity 0.2s ease;
+}
+.cursor__ring {
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  display: grid;
+  place-items: center;
+}
+.cursor__ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  transition:
+    transform 0.45s var(--ease-out),
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+.cursor[data-mode="link"] .cursor__ring::before {
+  transform: scale(1.5);
+  background: #fff;
+}
+.cursor[data-mode="link"] .cursor__dot,
+.cursor.has-label .cursor__dot {
+  opacity: 0;
+}
+.cursor[data-mode="text"] .cursor__ring::before {
+  transform: scale(0.4);
+  border-color: transparent;
+}
+.cursor.has-label .cursor__ring::before {
+  transform: scale(2.7);
+  background: var(--color-paper);
+  border-color: var(--color-paper);
+}
+.cursor.is-down .cursor__ring::before {
+  transform: scale(0.8);
+}
+.cursor.has-label.is-down .cursor__ring::before {
+  transform: scale(2.4);
+}
+.cursor__label {
+  position: relative;
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-variation-settings: "wdth" 112;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 0.25s ease,
+    transform 0.45s var(--ease-out);
+}
+.cursor.has-label .cursor__label {
+  opacity: 1;
+  transform: none;
+}
+
 /* ---------- Intro ---------- */
 .intro {
   position: fixed;

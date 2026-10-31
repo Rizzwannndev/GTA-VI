@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
+import { magnetic } from "../../animations/motion";
 import Logo from "./Logo";
 import MusicToggle from "./MusicToggle";
 import Menu from "./Menu";
@@ -40,6 +41,9 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // A gentle magnetic pull on the logo and the two header controls.
+  useEffect(() => magnetic(headerRef.current.querySelectorAll(".logo, .eq, .menu-btn"), { strength: 0.22 }), []);
 
   const cls = ["site-header", open && "is-open", hidden && !open && "is-hidden", scrolled && !open && "is-scrolled"].filter(Boolean).join(" ");
 
