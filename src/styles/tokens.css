@@ -1,0 +1,75 @@
+/*
+  Design tokens. Every colour, font, size and motion value the site uses lives
+  here. Tailwind's @theme turns the --color-* and --font-* entries into
+  utilities (bg-ink, text-pink, font-display...) as well as plain CSS vars.
+*/
+@theme {
+  /* Ground: Vice City after sundown */
+  --color-ink: #0c0820;
+  --color-ink-2: #170f35;
+  --color-ink-3: #24174d;
+  --color-dusk: #3a1f78;
+
+  /* Sunset accents, sampled from the VI logo and the bay artwork */
+  --color-pink: #ff3d8b;
+  --color-magenta: #c2187f;
+  --color-orange: #ff8b3d;
+  --color-gold: #ffcf7a;
+  --color-teal: #30e3d0;
+  --color-sky: #4a6ee0;
+
+  /* Text, tinted toward the violet ground rather than neutral grey */
+  --color-paper: #f7eefb;
+  --color-haze: #c5b6e0;
+  --color-fog: #8f80b3;
+
+  --font-display: "Pricedown", "Barlow Condensed", Impact, sans-serif;
+  --font-body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-cond: "Barlow Condensed", "Barlow", system-ui, sans-serif;
+}
+
+:root {
+  /* The logo's own gradient, used as light and fields, never as text fill */
+  --grad-sunset: linear-gradient(180deg, #4a6ee0 0%, #8a4fd0 34%, #ff4fa6 66%, #ff9b4a 100%);
+  --grad-horizon: linear-gradient(90deg, #ff3d8b 0%, #ff8b3d 50%, #ffcf7a 100%);
+  --glow-pink: 0 0 0.5em rgb(255 61 139 / 0.55), 0 0 1.6em rgb(255 61 139 / 0.35);
+  --glow-teal: 0 0 0.5em rgb(48 227 208 / 0.5), 0 0 1.4em rgb(48 227 208 / 0.3);
+
+  /* Fluid type scale (minor-third steps, clamped for 320px to 2560px) */
+  --fs-micro: clamp(0.75rem, 0.72rem + 0.12vw, 0.82rem);
+  --fs-small: clamp(0.875rem, 0.84rem + 0.15vw, 0.95rem);
+  --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --fs-lead: clamp(1.125rem, 1.04rem + 0.45vw, 1.45rem);
+  --fs-h4: clamp(1.4rem, 1.2rem + 0.9vw, 2rem);
+  --fs-h3: clamp(1.9rem, 1.5rem + 1.8vw, 3.2rem);
+  --fs-h2: clamp(2.6rem, 1.8rem + 4vw, 6rem);
+  --fs-h1: clamp(3.2rem, 2rem + 7vw, 9rem);
+  --fs-mega: clamp(4.5rem, 2rem + 14vw, 17rem);
+
+  /* Spacing rhythm */
+  --gutter: clamp(1rem, 0.6rem + 2.2vw, 3rem);
+  --section-y: clamp(5rem, 3rem + 9vw, 12rem);
+  --measure: 62ch;
+  --header-h: clamp(64px, 56px + 2vw, 88px);
+
+  /* Radii: sharp for type-led surfaces, a soft corner only on media */
+  --radius-media: 6px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --dur-fast: 180ms;
+  --dur-med: 420ms;
+
+  /* Stacking order, one list so layers never fight */
+  --z-content: 1;
+  --z-header: 50;
+  --z-menu: 60;
+  --z-modal: 70;
+  --z-transition: 80;
+  --z-preloader: 90;
+  --z-intro: 100;
+  --z-grain: 110;
+  --z-cursor: 120;
+}

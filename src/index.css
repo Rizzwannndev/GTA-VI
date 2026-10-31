@@ -1,109 +1,45 @@
 @import "tailwindcss";
-@font-face {
-  font-family: "priceDown";
-  src: url(./pricedown.otf);
-}
+@import "./styles/tokens.css";
+@import "./styles/base.css";
 
-html, body{
-  width: 100%;
+/* Legacy home buttons, kept until the home page is rebuilt in phase 2 */
+.btn,
+.btn-steam {
+  color: #000;
+  padding: 12px 45px;
+  border-radius: 6px;
+  position: relative;
+  z-index: 1;
+}
+.btn {
+  border: 2px solid #f0b100;
+}
+.btn-steam {
+  border: 2px solid #66c0f4;
+}
+.btn::before,
+.btn-steam::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
   height: 100%;
-  font-family: "priceDown";
-  background-color: #000;
+  width: 0%;
+  z-index: -1;
+  transition: 0.3s;
 }
-
-::-webkit-scrollbar {
-  width: 6px;
+.btn:hover::before,
+.btn-steam:hover::before {
+  width: 100%;
 }
-
-::-webkit-scrollbar-track {
-  background: transparent;
+.btn:hover {
+  color: #f0b100;
 }
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    to bottom,
-    #a855f7,
-    #ec4899,
-    #3b82f6,
-    #ffffff
-  );
-  border-radius: 10px;
+.btn-steam:hover {
+  color: #66c0f4;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    to bottom,
-    #c084fc,
-    #f472b6,
-    #60a5fa,
-    #ffffff
-  );
-}
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #ec4899 transparent;
-}
-
-img {
-  user-select: none;
-  -webkit-user-drag: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  pointer-events: none;
-}
-.btn{
-    color: #000;
-    border: 2px solid #f0b100;
-    padding: 12px 45px;
-    border-radius: 6px;
-    position: relative;
-    z-index: 1;
-}
-.btn::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: black;
-    height: 100%;
-    width: 0%;
-    z-index: -1;
-    transition: .3s ;
-}
-.btn:hover::before{
-    width: 100%;
-}
-.btn:hover{
-    color: #f0b100;
-}
-.btn-steam{
-    color: #000;
-    border: 2px solid #66c0f4;
-    padding: 12px 45px;
-    border-radius: 6px;
-    position: relative;
-    z-index: 1;
-}
-.btn-steam::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: black;
-    height: 100%;
-    width: 0%;
-    z-index: -1;
-    transition: .3s ;
-}
-.btn-steam:hover::before{
-    width: 100%;
-}
-.btn-steam:hover{
-    color: #66c0f4;
-}
-.license span a:hover{
+.license span a:hover {
   color: #f0b100;
   transition: 0.3s;
 }
