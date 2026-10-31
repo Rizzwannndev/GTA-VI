@@ -110,6 +110,7 @@ export default function VideoModal() {
               title={`Grand Theft Auto VI ${trailer.title}`}
               allow="autoplay; encrypted-media; picture-in-picture; fullscreen; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
             />
           )}
         </div>
@@ -122,6 +123,7 @@ export default function VideoModal() {
               Video by{" "}
               <a href={youtubeUrl(trailer)} target="_blank" rel="noreferrer">
                 Rockstar Games on YouTube
+                <span className="sr-only"> (opens in a new tab)</span>
               </a>
             </span>
           </p>
