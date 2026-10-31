@@ -1,7 +1,7 @@
 // The six regions Rockstar names on rockstargames.com/VI. Region names are
 // official; the `note` text is our own fan write-up from the trailers and
-// the official page, not Rockstar copy. Photos are real-world stand-ins
-// (Florida places that match each region), credited from photos.js.
+// the official page, not Rockstar copy. Pictures are Rockstar's official
+// screenshots of each region, credited from photos.js.
 import { photos } from "../assets/photos/photos";
 
 export const locations = [

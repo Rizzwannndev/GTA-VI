@@ -55,9 +55,9 @@ export default function Cta() {
         </div>
       </div>
       <p className="cta__credit">
-        Photo:{" "}
+        Screenshot:{" "}
         <a href={photos.palms.href} target="_blank" rel="noreferrer">
-          {photos.palms.credit} on Unsplash<span className="sr-only"> (opens in a new tab)</span>
+          {photos.palms.credit}<span className="sr-only"> (opens in a new tab)</span>
         </a>
       </p>
     </section>

@@ -94,9 +94,9 @@ export default function Leonida() {
                 <Picture image={active.photo} alt="" sizes="(max-width: 900px) 100vw, 40vw" loading="eager" />
               </div>
               <p className="detail__credit">
-                Stand-in photo:{" "}
+                Screenshot:{" "}
                 <a href={active.photo.href} target="_blank" rel="noreferrer">
-                  {active.photo.credit} on Unsplash<span className="sr-only"> (opens in a new tab)</span>
+                  {active.photo.credit}<span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </p>
               <div className="detail__body" key={active.id}>

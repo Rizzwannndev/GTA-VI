@@ -3,12 +3,12 @@ import { gsap, useGSAP, Flip, prefersReducedMotion } from "../animations/gsap";
 import { revealText } from "../animations/motion";
 import { lockScroll, unlockScroll } from "../animations/smooth";
 import { useFocusTrap } from "../hooks/useFocusTrap";
-import { art } from "../assets/images/art";
 import { gallery } from "../data/gallery";
 import PageMeta from "../components/layout/PageMeta";
 import PageHero from "../components/layout/PageHero";
 import Icon from "../components/ui/Icon";
 import Picture from "../components/ui/Picture";
+import { photos } from "../assets/photos/photos";
 
 const KIND_LABEL = { art: "Fan art", still: "Official still", photo: "Photo" };
 
@@ -110,14 +110,14 @@ export default function Gallery() {
       <PageHero
         title="Gallery"
         lede="Key art, stills from Rockstar's trailers and the site's own artwork. Open any frame to see it full size."
-        image={art.bay}
+        image={photos["duo-skyline"]}
       />
       <section className="shots section" aria-labelledby="shots-title">
         <div className="wrap">
           <h2 id="shots-title" className="shots__title">
             Frames from Leonida
           </h2>
-          <p className="shots__intro">Official stills load straight from Rockstar's YouTube thumbnails and stay credited to Rockstar Games.</p>
+          <p className="shots__intro">Official screenshots and trailer stills from Rockstar Games, plus a few pieces of fan art. Open any frame to see it full size.</p>
           <ul className="shots__grid">
             {gallery.map((g, i) => (
               <li key={g.id} className="shots__item" data-shot={g.id}>

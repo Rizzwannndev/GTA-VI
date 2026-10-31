@@ -1,11 +1,7 @@
 // Characters as introduced on rockstargames.com/VI/only-in-leonida.
 // Quotes marked `quote` are Rockstar's own lines; `bio` is our paraphrase.
 import { art } from "../assets/images/art";
-import calArt from "../assets/placeholders/cast-cal-hampton.svg";
-import dreArt from "../assets/placeholders/cast-dre-quan-priest.svg";
-import dimezArt from "../assets/placeholders/cast-real-dimez.svg";
-import raulArt from "../assets/placeholders/cast-raul-bautista.svg";
-import brianArt from "../assets/placeholders/cast-brian-heder.svg";
+import { photos } from "../assets/photos/photos";
 
 export const leads = [
   {
@@ -35,24 +31,21 @@ export const cast = [
     role: "Vice City entrepreneur",
     quote: "It's all about heart. The Jack of Hearts.",
     bio: "Built a legitimate empire out of Vice City nightlife, and is still all business when it counts. Partner in Only Raw Records.",
-    image: art.boobie,
-    placeholder: false,
+    image: photos["cast-boobie-ike"],
   },
   {
     id: "dre-quan-priest",
     name: "Dre'Quan Priest",
     role: "Runs Only Raw Records",
     bio: "A former dealer who always wanted to be in music. Now he runs the label, and he signed the Real Dimez.",
-    src: dreArt,
-    placeholder: true,
+    image: photos["cast-dre-quan-priest"],
   },
   {
     id: "real-dimez",
     name: "Real Dimez",
     role: "Bae-Luxe and Roxy",
     bio: "Childhood friends turned rap duo, built on viral videos and viral hooks. Signed to Only Raw Records.",
-    src: dimezArt,
-    placeholder: true,
+    image: photos["cast-real-dimez"],
   },
   {
     id: "raul-bautista",
@@ -60,8 +53,7 @@ export const cast = [
     role: "Bank robber, recruiter",
     quote: "Experience counts.",
     bio: "A seasoned bank robber who recruits talent for risky jobs. His recklessness keeps raising the stakes.",
-    src: raulArt,
-    placeholder: true,
+    image: photos["cast-raul-bautista"],
   },
   {
     id: "cal-hampton",
@@ -69,8 +61,7 @@ export const cast = [
     role: "Jason's friend",
     quote: "What if everything on the internet was true?",
     bio: "A homebody who keeps one ear on Coast Guard radio traffic and the other on every theory going.",
-    src: calArt,
-    placeholder: true,
+    image: photos["cast-cal-hampton"],
   },
   {
     id: "brian-heder",
@@ -78,7 +69,6 @@ export const cast = [
     role: "Old-school drug runner",
     quote: "Nothing better than a Mudslide at sunset.",
     bio: "Runs a boat yard with his third wife, Lori, and lets Jason stay rent-free in exchange for help with shakedowns.",
-    src: brianArt,
-    placeholder: true,
+    image: photos["cast-brian-heder"],
   },
 ];

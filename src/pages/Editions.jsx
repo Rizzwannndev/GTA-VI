@@ -3,11 +3,11 @@ import { gsap, useGSAP, prefersReducedMotion } from "../animations/gsap";
 import { revealText } from "../animations/motion";
 import { PRICES_NOTE, editions } from "../data/editions";
 import { OFFICIAL_URL, PLATFORMS, RELEASE_LABEL } from "../data/site";
-import { art } from "../assets/images/art";
 import PageMeta from "../components/layout/PageMeta";
 import PageHero from "../components/layout/PageHero";
 import Button from "../components/ui/Button";
 import Icon from "../components/ui/Icon";
+import { photos } from "../assets/photos/photos";
 
 // The glow follows the pointer: we only write two custom properties, the
 // gradient itself is CSS.
@@ -42,7 +42,7 @@ export default function Editions() {
       <PageHero
         title="Editions"
         lede={`Out ${RELEASE_LABEL} on ${PLATFORMS.join(" and ")}. Here's how the editions compare.`}
-        image={art.boobie}
+        image={photos["sports-coupe"]}
       />
       <section className="tiers section" aria-labelledby="tiers-title">
         <div className="wrap">

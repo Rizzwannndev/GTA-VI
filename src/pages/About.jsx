@@ -2,11 +2,11 @@ import { useRef, useState } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "../animations/gsap";
 import { revealText } from "../animations/motion";
 import { AUTHOR, DISCLAIMER, OFFICIAL_URL } from "../data/site";
-import { art } from "../assets/images/art";
 import PageMeta from "../components/layout/PageMeta";
 import PageHero from "../components/layout/PageHero";
 import Button from "../components/ui/Button";
 import Icon from "../components/ui/Icon";
+import { photos } from "../assets/photos/photos";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -79,7 +79,7 @@ export default function About() {
       <PageHero
         title="About"
         lede="A fan's love letter to Leonida, built to practise web animation. Not a Rockstar site."
-        image={art.lucia}
+        image={photos["vice-rooftop"]}
       />
 
       <section className="story section" aria-labelledby="story-title">
@@ -93,8 +93,8 @@ export default function About() {
               November. Everything moves with GSAP and Lenis; nothing is a template.
             </p>
             <p>
-              Facts come from Rockstar's own pages and videos, and every trailer plays from Rockstar's YouTube channel. Where the art is a
-              stand-in, it says so.
+              Facts come from Rockstar's own pages and videos, and every trailer plays from Rockstar's YouTube channel. Screenshots are Rockstar's own, and credited
+              wherever they appear.
             </p>
             <p className="story__fine">{DISCLAIMER}</p>
             <div className="story__links">

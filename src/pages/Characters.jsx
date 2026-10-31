@@ -69,18 +69,13 @@ export default function Characters() {
           <h2 id="cast-title" className="cast__title">
             Who else is in town
           </h2>
-          <p className="cast__note">Names, roles and quotes from Rockstar's character pages. Portraits marked as placeholders are stand-ins.</p>
+          <p className="cast__note">Names, roles and quotes from Rockstar's character pages. Screenshots: Rockstar Games.</p>
           <ul className="cast__grid">
             {cast.map((p) => (
               <li key={p.id}>
                 <TiltCard className="cast__card" data-cursor="view">
                   <div className="cast__img">
-                    {p.image ? (
-                      <Picture image={p.image} alt={p.name} sizes="(max-width: 600px) 90vw, 30vw" />
-                    ) : (
-                      <img src={p.src} alt="" width="800" height="1000" loading="lazy" decoding="async" />
-                    )}
-                    {p.placeholder && <span className="cast__badge">Placeholder portrait</span>}
+                    <Picture image={p.image} alt={p.name} sizes="(max-width: 600px) 90vw, 30vw" />
                   </div>
                   <div className="cast__body">
                     <h3 className="cast__name">{p.name}</h3>

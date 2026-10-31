@@ -141,7 +141,7 @@ export default function Vehicles() {
       <PageHero
         title="Garage"
         lede="What people drive, sail and fly in Leonida, as seen in the trailers. Drag the row to browse."
-        image={photos["sports-coupe"]}
+        image={photos["speedboat"]}
       />
       <section className="garage section" aria-labelledby="garage-title">
         <div className="wrap garage__head">
@@ -149,7 +149,7 @@ export default function Vehicles() {
             <h2 id="garage-title" className="garage__title">
               Pick a ride
             </h2>
-            <p className="garage__intro">Vehicle types from the trailers, not confirmed models. Ratings are our guesses out of ten.</p>
+            <p className="garage__intro">Models named in Rockstar's screenshots, plus a few types from the trailers. Ratings are our guesses out of ten.</p>
           </div>
           <div className="garage__controls">
             <p className="garage__count tabular" aria-live="polite">
@@ -195,7 +195,7 @@ export default function Vehicles() {
                   <span className="garage__type">{v.type}</span>
                 </div>
                 <h3 className="garage__name">{v.name}</h3>
-                <p className="garage__credit">Photo: {v.photo.credit}</p>
+                <p className="garage__credit">Screenshot: {v.photo.credit}</p>
                 <p className="garage__note">{v.note}</p>
                 <dl className="garage__stats">
                   {Object.entries(v.ratings).map(([k, val]) => (

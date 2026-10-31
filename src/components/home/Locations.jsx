@@ -80,7 +80,7 @@ export default function Locations() {
                     <p className="postcard__kicker">{loc.kicker}</p>
                   </div>
                 </Link>
-                <p className="postcard__credit">Photo: {loc.photo.credit}</p>
+                <p className="postcard__credit">Screenshot: {loc.photo.credit}</p>
               </li>
             ))}
           </ol>

@@ -6,8 +6,8 @@ import { art } from "../assets/images/art";
 import { photos } from "../assets/photos/photos";
 
 const leonidaPreview = photos["vice-beach"].small;
-const vehiclesPreview = photos["sports-coupe"].small;
-const editionsPreview = photos["vice-cardozo"].small;
+const vehiclesPreview = photos["speedboat"].small;
+const editionsPreview = photos["sports-coupe"].small;
 
 const yt = (id) => `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
 
@@ -40,7 +40,7 @@ export const routes = [
   route("characters", "/characters", "Characters", "Characters", "Jason Duval, Lucia Caminos and the people of Leonida, as introduced by Rockstar Games.", art.duo.src),
   route("leonida", "/leonida", "Leonida", "The map of Leonida", "An interactive fan map of Leonida: Vice City, the Keys, Grassrivers, Port Gellhorn, Ambrosia and Mount Kalaga.", leonidaPreview),
   route("vehicles", "/vehicles", "Vehicles", "Vehicles", "A fan garage of the cars, boats and bikes of Leonida.", vehiclesPreview),
-  route("gallery", "/gallery", "Gallery", "Gallery", "Artwork and stills from around Leonida.", art.boobie.src),
+  route("gallery", "/gallery", "Gallery", "Gallery", "Artwork and stills from around Leonida.", photos["duo-skyline"].small),
   route("trailers", "/trailers", "Trailers", "Official trailers", "Every official Grand Theft Auto VI trailer and video from Rockstar Games.", yt("rz1B4B2yBZY")),
   route("news", "/news", "News", "News", "A timeline of official Grand Theft Auto VI announcements.", yt("EiQEBYDox_k")),
   route("editions", "/editions", "Editions", "Editions and pre-order", "Grand Theft Auto VI editions and where to pre-order.", editionsPreview),
