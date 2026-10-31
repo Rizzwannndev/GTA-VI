@@ -4,15 +4,18 @@ import { initSmoothScroll, destroySmoothScroll } from "./animations/smooth";
 import { stage } from "./animations/stage";
 import { initMusic } from "./audio/music";
 import { useScrollRefresh } from "./hooks/useScrollRefresh";
+import { useRouteTransition } from "./hooks/useRouteTransition";
 import { VideoProvider } from "./context/VideoContext";
 import { routes, notFoundRoute } from "./data/routes";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Grain from "./components/layout/Grain";
+import PageTransition from "./components/layout/PageTransition";
 import VideoModal from "./components/video/VideoModal";
 
 function App() {
   useScrollRefresh();
+  const location = useRouteTransition();
 
   useEffect(() => {
     initSmoothScroll();
@@ -34,7 +37,7 @@ function App() {
       <Header />
       <main id="main" tabIndex={-1}>
         <Suspense fallback={null}>
-          <Routes>
+          <Routes location={location}>
             {routes.map((r) => {
               const Page = r.Component;
               return <Route key={r.key} path={r.path} element={<Page />} />;
@@ -45,6 +48,7 @@ function App() {
       </main>
       <Footer />
       <VideoModal />
+      <PageTransition />
       <Grain />
     </VideoProvider>
   );

@@ -606,6 +606,48 @@
   color: var(--color-haze);
 }
 
+/* ---------- Page transition ---------- */
+.pt {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-transition);
+  visibility: hidden;
+  overflow: hidden;
+}
+/* yPercent is owned by GSAP; no CSS transform on the panels. */
+.pt__panel {
+  position: absolute;
+  inset: 0;
+}
+.pt__panel--a {
+  background: #ff4f9a;
+}
+.pt__panel--b {
+  background: #ff9a52;
+}
+.pt__panel--c {
+  display: grid;
+  place-items: center;
+  padding-inline: var(--gutter);
+  background: #000;
+}
+.pt__name {
+  margin: 0;
+  overflow: hidden;
+  padding-block: 0.06em;
+  font-size: min(14rem, calc(92vw / var(--len, 8)), 26svh);
+  font-weight: 900;
+  font-variation-settings: "wdth" 125;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--color-paper);
+  white-space: nowrap;
+}
+.pt__name-text {
+  display: block;
+}
+
 /* ---------- Intro ---------- */
 .intro {
   position: fixed;
