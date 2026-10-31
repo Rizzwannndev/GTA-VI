@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "../../animations/gsap";
+import { scrambleText } from "../../animations/motion";
 import { daysUntilRelease } from "../../data/site";
 import { trailers } from "../../data/trailers";
 import { locations } from "../../data/locations";
@@ -40,6 +41,7 @@ export default function Stats() {
         duration: 1,
         scrollTrigger: { trigger: rootRef.current, start: "top 85%", once: true },
       });
+      scrambleText(".stats__label", { trigger: rootRef.current, start: "top 85%", delay: 0.3 });
     },
     { scope: rootRef },
   );

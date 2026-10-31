@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Routes, Route } from "react-router";
 import { initSmoothScroll, destroySmoothScroll } from "./animations/smooth";
 import { stage } from "./animations/stage";
@@ -11,15 +11,18 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Grain from "./components/layout/Grain";
 import PageTransition from "./components/layout/PageTransition";
+import Preloader from "./components/layout/Preloader";
 import VideoModal from "./components/video/VideoModal";
 
 function App() {
   useScrollRefresh();
   const location = useRouteTransition();
+  const [booting, setBooting] = useState(true);
+  // The home intro takes over straight from the preloader.
+  const [handoff] = useState(() => location.pathname === "/");
 
   useEffect(() => {
     initSmoothScroll();
-    stage.set({ revealed: true });
     const stopMusic = initMusic();
     return () => {
       stopMusic();
@@ -49,6 +52,7 @@ function App() {
       <Footer />
       <VideoModal />
       <PageTransition />
+      {booting && <Preloader handoff={handoff} onReveal={() => stage.set({ revealed: true })} onDone={() => setBooting(false)} />}
       <Grain />
     </VideoProvider>
   );

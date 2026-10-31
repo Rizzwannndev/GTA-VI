@@ -648,6 +648,36 @@
   display: block;
 }
 
+/* ---------- Preloader ---------- */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-preloader);
+  display: grid;
+  place-items: center;
+  background: #000;
+}
+.preloader__stage {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(0.5rem, 3vw, 2.5rem);
+  color: rgb(255 255 255 / 0.5);
+}
+.preloader__mark {
+  width: clamp(110px, 16vw, 210px);
+  height: auto;
+  margin-bottom: clamp(0.5rem, 2vw, 1.5rem);
+  overflow: visible;
+}
+.preloader__fill {
+  opacity: 0;
+  visibility: hidden;
+}
+.preloader__palm {
+  width: clamp(56px, 8vw, 112px);
+  height: auto;
+}
+
 /* ---------- Intro ---------- */
 .intro {
   position: fixed;

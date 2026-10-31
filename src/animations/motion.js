@@ -63,6 +63,24 @@ export function revealText(
 }
 
 /**
+ * Scramble a short string into place, like a departures board settling.
+ * Meant for a few key words (dates, labels), never running text. The element
+ * must hold plain text only. Reduced motion leaves the text alone.
+ */
+export function scrambleText(target, { delay = 0, duration = 1.2, trigger, start = "top 88%", scroll = true } = {}) {
+  if (prefersReducedMotion()) return null;
+  return toArray(target).map((el) =>
+    gsap.to(el, {
+      duration,
+      delay,
+      ease: "none",
+      scrambleText: { text: el.textContent, chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", revealDelay: 0.35, speed: 0.5 },
+      scrollTrigger: scroll ? { trigger: trigger ?? el, start, once: true } : undefined,
+    }),
+  );
+}
+
+/**
  * Clip-path wipe from the bottom edge while the inner media settles from a
  * slight zoom. Pass the frame; the first img/svg/video inside is the media.
  */

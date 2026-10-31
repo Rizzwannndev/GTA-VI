@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "../animations/gsap";
-import { revealText } from "../animations/motion";
+import { revealText, scrambleText } from "../animations/motion";
 import { featuredTrailer, formatDate, thumbnailUrl, trailers, youtubeUrl } from "../data/trailers";
 import PageMeta from "../components/layout/PageMeta";
 import PageHero from "../components/layout/PageHero";
@@ -16,6 +16,7 @@ export default function Trailers() {
     () => {
       revealText(".reel__title", { type: "chars", stagger: 0.02 });
       revealText(".reel__desc", { delay: 0.1 });
+      scrambleText(".reel__date");
       revealText(".archive__title", { type: "chars", stagger: 0.02 });
       if (prefersReducedMotion()) return;
       gsap.from(".reel__player", {

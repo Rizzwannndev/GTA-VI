@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { gsap, useGSAP, Flip, prefersReducedMotion } from "../animations/gsap";
-import { revealText } from "../animations/motion";
+import { revealText, scrambleText } from "../animations/motion";
 import { NEWS_CATEGORIES, news } from "../data/news";
 import { formatDate } from "../data/trailers";
 import PageMeta from "../components/layout/PageMeta";
@@ -17,6 +17,7 @@ export default function News() {
   useGSAP(
     () => {
       revealText(".wire__title", { type: "chars", stagger: 0.02 });
+      scrambleText(".wire__meta time", { trigger: ".wire__list", start: "top 85%", delay: 0.2 });
       if (prefersReducedMotion()) return;
       gsap.from(".wire__card", {
         y: 70,

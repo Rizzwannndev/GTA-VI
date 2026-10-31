@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { gsap, useGSAP, MQ, prefersReducedMotion, isFinePointer } from "../../animations/gsap";
 import { scrollToTarget } from "../../animations/smooth";
+import { scrambleText } from "../../animations/motion";
 import { art } from "../../assets/images/art";
 import Picture from "../ui/Picture";
 import Icon from "../ui/Icon";
@@ -69,6 +70,7 @@ export default function Hero({ ready }) {
       gsap.fromTo(".hero__logo", { scale: 1.6, rotate: -10 }, { scale: 1, rotate: 0, duration: 2, delay: -0.95, ease: "expo.inOut" });
       gsap.fromTo(".hero__bar-item", { opacity: 0.1 }, { opacity: 1, duration: 2, delay: -0.5, ease: "expo.inOut" });
       gsap.from(".hero__info > *", { y: 30, autoAlpha: 0, stagger: 0.08, duration: 1.2, delay: 0.5, ease: "vice" });
+      scrambleText(".hero__date-text", { scroll: false, delay: 0.6, duration: 1.4 });
     },
     { dependencies: [ready], scope: rootRef },
   );
@@ -134,7 +136,7 @@ export default function Hero({ ready }) {
           <div className="hero__info">
             <p className="hero__date">
               <span className="sr-only">Release date: </span>
-              {RELEASE_LABEL}
+              <span className="hero__date-text">{RELEASE_LABEL}</span>
             </p>
             <PlatformMarks className="hero__platforms" />
             <div className="hero__actions">

@@ -32,8 +32,13 @@ export default function Home() {
   return (
     <>
       <PageMeta route="home" />
-      {playIntro && !introDone && revealed && <Intro onDone={finishIntro} />}
-      {playIntro && !introDone && !revealed && <div className="intro" aria-hidden="true" />}
+      {/* A stable host: the hero below gets wrapped in a pin-spacer on mount,
+          so React must never need to insert a new sibling before it. */}
+      {playIntro && !introDone && (
+        <div className="intro-host">
+          {revealed ? <Intro onDone={finishIntro} /> : <div className="intro" aria-hidden="true" />}
+        </div>
+      )}
       <Hero ready={revealed && introDone} />
       <Welcome />
       <TrailerFeature />
