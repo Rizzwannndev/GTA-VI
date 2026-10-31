@@ -47,9 +47,10 @@ export default function Characters() {
         <section key={c.id} className={`lead section ${i % 2 ? "lead--flip" : ""}`} style={{ "--tint": c.tint }} aria-labelledby={`lead-${c.id}`}>
           <div className="lead__glow" aria-hidden="true" />
           <div className="wrap lead__grid">
-            <div className="lead__frame">
-              <Picture image={c.image} alt={c.name} sizes="(max-width: 900px) 70vw, 30vw" />
-            </div>
+            <figure className="lead__frame" style={{ "--focus": c.focus }}>
+              <Picture image={c.image} alt={c.imageAlt} sizes="(max-width: 900px) 90vw, 40vw" />
+              <figcaption className="lead__credit">Screenshot: {c.image.credit}</figcaption>
+            </figure>
             <div className="lead__text">
               <h2 id={`lead-${c.id}`} className="lead__name">
                 {c.name}

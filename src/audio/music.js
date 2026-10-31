@@ -2,8 +2,8 @@
 // starts it with a fade-in, and the choice is remembered in localStorage.
 //
 // Source: if public/audio/leonida-nights.mp3 exists, that file plays on a
-// loop. Drop any royalty-free synthwave track there (same file name) to use
-// it. Without the file, a small generative synthwave loop is synthesised in
+// loop. Drop any track you have the rights to there (same file name) to use
+// it. Without the file, a small generative West Coast groove is synthesised in
 // the browser with the Web Audio API, so the toggle always works and no
 // copyrighted audio ships with the site.
 import { useSyncExternalStore } from "react";
@@ -16,7 +16,7 @@ const VOLUME = 0.55;
 const FADE_IN = 2.2;
 const FADE_OUT = 0.8;
 
-let state = { on: false, playing: false, track: "Leonida Nights" };
+let state = { on: false, playing: false, track: "Leonida Drive" };
 const listeners = new Set();
 const set = (patch) => {
   state = { ...state, ...patch };

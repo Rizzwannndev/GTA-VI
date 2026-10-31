@@ -16,13 +16,15 @@ export default function PageHero({ title, lede, image, src, alt = "", tone = "va
       revealText(".page-hero__title", { type: "chars", scroll: false, stagger: 0.03, duration: 1.2 });
       revealText(".page-hero__lede", { scroll: false, delay: 0.35 });
       if (prefersReducedMotion()) return;
+      if (!rootRef.current.querySelector(".page-hero__media")) return;
       gsap.fromTo(".page-hero__media", { scale: 1.25 }, { scale: 1.05, duration: 2.4, ease: "vice" });
       gsap.to(".page-hero__media", {
         yPercent: 18,
         ease: "none",
         scrollTrigger: { trigger: rootRef.current, start: "top top", end: "bottom top", scrub: true },
       });
-      gsap.from(".page-hero__extra > *", { y: 30, autoAlpha: 0, stagger: 0.08, delay: 0.5, duration: 1 });
+      const extra = rootRef.current.querySelectorAll(".page-hero__extra > *");
+      if (extra.length) gsap.from(extra, { y: 30, autoAlpha: 0, stagger: 0.08, delay: 0.5, duration: 1 });
     },
     { dependencies: [revealed], scope: rootRef },
   );

@@ -29,45 +29,53 @@
   transform-origin: 50% 40%;
 }
 /* Static offset lives on a wrapper GSAP never animates */
+/* The logo sits under the header; the leads are sized and lowered so the
+   top of Jason's head just meets its base and never covers the wordmark. */
 .hero__logo-pos {
   position: absolute;
   left: 50%;
-  top: 50%;
-  translate: calc(-50% - 40px) calc(-100% - 6vh);
+  top: calc(var(--header-h) + 1.5svh);
+  translate: -50% 0;
 }
 .hero__logo {
-  height: clamp(170px, 34vh, 330px);
+  height: clamp(150px, 30svh, 330px);
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 18px 40px rgb(0 0 0 / 0.45));
 }
 .hero__layer--chars {
-  top: auto;
-  bottom: -100px;
-  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
 }
+/* Sized by height so both heads always sit inside the frame: the art is
+   1376x768 with the figures running off its bottom edge. */
 .hero__layer--chars picture {
   display: block;
-  height: 100%;
+  flex: none;
+  height: 94%;
+  aspect-ratio: 1376 / 768;
+  translate: 0 calc(var(--header-h) + 15svh);
 }
 .hero__chars {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: 50% 100%;
-  transform: scale(0.82);
-  transform-origin: 50% 70%;
+  transform-origin: 50% 100%;
 }
 .hero__dusk {
   position: absolute;
   inset: 0;
   opacity: 0;
-  background: rgb(0 0 0 / 0.78);
   pointer-events: none;
 }
 .hero__premise {
   position: absolute;
   inset: 0;
+  z-index: 1;
   display: grid;
   place-content: center;
   justify-items: center;
@@ -77,19 +85,48 @@
   visibility: hidden;
 }
 .hero__premise-text {
-  max-width: 24ch;
-  font-size: var(--fs-h3);
-  font-weight: 700;
-  font-variation-settings: "wdth" 110;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
+  max-width: min(100%, 24ch);
+  font-size: min(clamp(1.75rem, 0.8rem + 3.5vw, 4.75rem), 7.4svh);
+  font-weight: 800;
+  font-variation-settings: "wdth" 116;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
   color: var(--color-paper);
   text-wrap: balance;
 }
+.hero__premise-word {
+  display: inline-block;
+  white-space: pre;
+}
+/* "darkest side" in outline: the light goes out of the letters. */
+.hero__premise-dark .hero__premise-word {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-paper);
+}
+/* "sunniest place in America" sits on a hand-drawn sunset underline. */
+.hero__premise-sun {
+  position: relative;
+  display: inline;
+}
+.hero__premise-swash {
+  position: absolute;
+  left: 0;
+  right: 0.3em;
+  bottom: -0.32em;
+  width: calc(100% - 0.3em);
+  height: 0.4em;
+  overflow: visible;
+}
 .hero__premise-credit {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   font-size: var(--fs-small);
   color: var(--color-haze);
+}
+.hero__dusk {
+  background:
+    radial-gradient(70% 60% at 50% 110%, rgb(155 79 208 / 0.28), transparent 70%),
+    rgb(0 0 0 / 0.8);
 }
 .hero__bar {
   position: absolute;
@@ -193,7 +230,16 @@
 .welcome__body {
   margin-top: clamp(4rem, 7vw, 7rem);
   display: grid;
-  gap: 2.5rem;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+}
+.welcome__grid {
+  display: grid;
+  gap: clamp(3rem, 6vw, 6rem);
+}
+.welcome__text {
+  display: grid;
+  align-content: start;
+  gap: clamp(2.5rem, 4vw, 3.5rem);
 }
 .welcome__copy {
   max-width: 34ch;
@@ -201,6 +247,194 @@
   font-weight: 500;
   line-height: 1.35;
   color: var(--color-paper);
+}
+
+/* The six regions as a ruled index. Each row draws its rule in, and on
+   hover the name slides over to make room for the arrow. */
+.welcome__regions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--line);
+}
+.welcome__region {
+  position: relative;
+  overflow: hidden;
+}
+.welcome__region-rule {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--line-strong);
+  transform-origin: left;
+}
+.welcome__region-link {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0.5rem 1rem 0;
+  color: var(--color-paper);
+  text-decoration: none;
+  isolation: isolate;
+}
+.welcome__region-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgb(155 79 208 / 0.28), rgb(255 79 154 / 0.18) 60%, transparent);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.6s var(--ease-in-out);
+}
+.welcome__region-name {
+  font-size: var(--fs-h4);
+  font-weight: 800;
+  font-variation-settings: "wdth" 118;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  transition: translate 0.5s var(--ease-out);
+}
+.welcome__region-kicker {
+  font-size: var(--fs-small);
+  color: var(--color-haze);
+  text-align: right;
+}
+.welcome__region-icon {
+  opacity: 0;
+  translate: -0.75rem 0.75rem;
+  transition:
+    opacity 0.3s ease,
+    translate 0.5s var(--ease-out);
+}
+.welcome__region-link:hover::before,
+.welcome__region-link:focus-visible::before {
+  clip-path: inset(0 0 0 0);
+}
+.welcome__region-link:hover .welcome__region-name,
+.welcome__region-link:focus-visible .welcome__region-name {
+  translate: 0.75rem 0;
+}
+.welcome__region-link:hover .welcome__region-icon,
+.welcome__region-link:focus-visible .welcome__region-icon {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* Collage: a tall photo, a smaller one that drifts faster across its
+   corner, and the spinning date badge. */
+.welcome__collage {
+  position: relative;
+  min-height: clamp(420px, 62vw, 760px);
+}
+.welcome__shot {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-media);
+  background: var(--color-surface);
+}
+.welcome__shot picture,
+.welcome__shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.welcome__shot--a {
+  top: 0;
+  right: 0;
+  width: 78%;
+  aspect-ratio: 4 / 5;
+}
+.welcome__shot--a img {
+  height: 120%;
+  margin-top: -10%;
+  object-position: 55% 50%;
+}
+.welcome__shot--b {
+  bottom: 6%;
+  left: 0;
+  z-index: 1;
+  width: 50%;
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.6);
+}
+.welcome__badge {
+  position: absolute;
+  top: 6%;
+  left: 4%;
+  z-index: 2;
+  width: clamp(110px, 12vw, 170px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+.welcome__badge-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  animation: badge-spin 22s linear infinite;
+}
+.welcome__badge-ring text {
+  font-size: 15px;
+  font-weight: 800;
+  font-variation-settings: "wdth" 118;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--color-paper);
+}
+.welcome__badge-mark {
+  width: 34%;
+  height: auto;
+}
+@keyframes badge-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+.welcome__credit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: var(--fs-micro);
+  color: var(--color-fog);
+}
+@media (min-width: 900px) {
+  .welcome__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    align-items: start;
+  }
+  .welcome__collage {
+    min-height: clamp(560px, 48vw, 820px);
+  }
+}
+@media (max-width: 599.98px) {
+  .welcome__region-kicker {
+    display: none;
+  }
+  .welcome__region-link {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .welcome__region-icon {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@media (hover: none) {
+  .welcome__region-icon {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .welcome__badge-ring {
+    animation: none;
+  }
 }
 
 /* ================= Trailer feature ================= */
@@ -371,7 +605,9 @@
   font-size: var(--fs-micro);
   color: var(--color-fog);
 }
-@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+/* With motion, the section pins and the reel scrolls sideways with the
+   page, on phones as well as desktops. */
+@media (prefers-reduced-motion: no-preference) {
   .locations__pin {
     height: 100svh;
     display: flex;
@@ -382,6 +618,8 @@
   .locations__head {
     margin-bottom: 2rem;
   }
+}
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
   .postcard {
     width: auto;
   }
@@ -390,7 +628,19 @@
     aspect-ratio: 5 / 6;
   }
 }
-@media (max-width: 899.98px), (prefers-reduced-motion: reduce) {
+@media (max-width: 899.98px) and (prefers-reduced-motion: no-preference) {
+  .locations {
+    padding-top: 0;
+  }
+  .locations__head {
+    margin-bottom: 1.25rem;
+  }
+  .postcard {
+    width: min(80vw, 30rem, 46svh);
+  }
+}
+/* Reduced motion: a native swipeable row with scroll snapping. */
+@media (prefers-reduced-motion: reduce) {
   .locations__viewport {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -414,6 +664,7 @@
 .duo__panels {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 2px;
 }
 .duo__panel {
   position: relative;
@@ -422,54 +673,64 @@
   isolation: isolate;
   display: flex;
   align-items: flex-end;
+  transition: opacity 0.6s ease;
 }
 .duo__field {
   position: absolute;
   inset: 0;
-  z-index: -2;
+  z-index: -1;
+  overflow: hidden;
 }
-.duo__field picture,
-.duo__field-img {
+.duo__field picture {
   display: block;
   width: 100%;
   height: 100%;
+}
+/* Oversized so the scroll parallax never shows an edge. */
+.duo__photo {
+  display: block;
+  width: 100%;
+  height: 116%;
+  margin-top: -8%;
   object-fit: cover;
+  object-position: var(--focus, 50% 40%);
+  scale: 1;
+  transition: scale 1.4s var(--ease-out);
 }
 .duo__field::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0.25) 40%, rgb(0 0 0 / 0.9));
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 0.35), rgb(0 0 0 / 0) 35%, rgb(0 0 0 / 0.25) 55%, rgb(0 0 0 / 0.92)),
+    linear-gradient(90deg, rgb(0 0 0 / 0.35), transparent 60%);
 }
-.duo__figure {
-  position: absolute;
-  bottom: 0;
-  z-index: -1;
-  height: 86%;
-  overflow: hidden;
+.duo__panel--jason .duo__field::after {
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 0.35), rgb(0 0 0 / 0) 35%, rgb(0 0 0 / 0.25) 55%, rgb(0 0 0 / 0.92)),
+    linear-gradient(270deg, rgb(0 0 0 / 0.35), transparent 60%);
 }
-.duo__figure picture,
-.duo__portrait {
-  height: 100%;
-  width: auto;
-  max-width: none;
-}
-.duo__panel--lucia .duo__figure {
-  right: 6%;
-}
-.duo__panel--jason .duo__figure {
-  left: 6%;
+@media (hover: hover) {
+  .duo__panel:hover .duo__photo {
+    scale: 1.06;
+  }
+  .duo__panels:hover .duo__panel:not(:hover) {
+    opacity: 0.55;
+  }
 }
 .duo__text {
   position: relative;
-  width: min(30rem, 60%);
+  width: min(34rem, 100%);
   padding: clamp(1.5rem, 3vw, 3rem) var(--gutter);
 }
 .duo__panel--jason .duo__text {
   margin-left: auto;
 }
+/* One line, always: the name scales with the panel, never wraps. */
 .duo__name {
-  font-size: var(--fs-h1);
+  font-size: clamp(3.5rem, 8.2vw, 9rem);
+  white-space: nowrap;
+  line-height: 0.9;
 }
 .duo__quote {
   margin: 1.25rem 0 0;
@@ -480,6 +741,11 @@
 }
 .duo__bio {
   margin-top: 0.9rem;
+}
+.duo__credit {
+  margin-top: 1.25rem;
+  font-size: var(--fs-micro);
+  color: var(--color-fog);
 }
 .duo__more {
   margin-top: clamp(2rem, 4vw, 3rem);
@@ -495,13 +761,49 @@
   list-style: none;
 }
 .stats__item {
-  display: grid;
-  gap: 0.75rem;
-  align-content: start;
-  padding: clamp(2rem, 4vw, 3.5rem) clamp(1rem, 2vw, 2rem);
+  position: relative;
 }
 .stats__item + .stats__item {
   border-left: 1px solid var(--line);
+}
+.stats__link {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  height: 100%;
+  min-height: clamp(220px, 22vw, 320px);
+  padding: clamp(2rem, 4vw, 3.5rem) clamp(1rem, 2vw, 2rem);
+  overflow: hidden;
+  color: var(--color-haze);
+  text-decoration: none;
+}
+/* The screenshot rises from the bottom edge behind the number. */
+.stats__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.75s var(--ease-in-out);
+}
+.stats__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 0.25), rgb(0 0 0 / 0.75));
+}
+.stats__bg picture,
+.stats__bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.stats__bg img {
+  scale: 1.25;
+  transition: scale 1.2s var(--ease-out);
 }
 .stats__num {
   font-size: clamp(3.2rem, 2rem + 5vw, 7.5rem);
@@ -515,6 +817,54 @@
   max-width: 20ch;
   font-size: var(--fs-body);
   line-height: 1.35;
+  transition: color 0.3s ease;
+}
+.stats__go {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-size: var(--fs-micro);
+  font-weight: 800;
+  font-variation-settings: "wdth" 115;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-paper);
+  opacity: 0;
+  translate: 0 0.75rem;
+  transition:
+    opacity 0.35s ease,
+    translate 0.5s var(--ease-out);
+}
+.stats__link:hover .stats__bg,
+.stats__link:focus-visible .stats__bg {
+  clip-path: inset(0 0 0 0);
+}
+.stats__link:hover .stats__bg img,
+.stats__link:focus-visible .stats__bg img {
+  scale: 1.05;
+}
+.stats__link:hover .stats__label,
+.stats__link:focus-visible .stats__label {
+  color: var(--color-paper);
+}
+.stats__link:hover .stats__go,
+.stats__link:focus-visible .stats__go {
+  opacity: 1;
+  translate: 0 0;
+}
+.stats__list:hover .stats__item:not(:hover) .stats__num {
+  opacity: 0.35;
+}
+.stats__num {
+  transition: opacity 0.4s ease;
+}
+@media (hover: none) {
+  .stats__go {
+    opacity: 1;
+    translate: none;
+  }
 }
 
 /* ================= CTA ================= */
@@ -581,24 +931,16 @@
 /* ================= Responsive ================= */
 @media (max-width: 899.98px) {
   .hero__logo-pos {
+    top: 50%;
     translate: -50% calc(-100% - 14vh);
   }
   .hero__logo {
     height: clamp(130px, 24vh, 230px);
   }
-  .hero__layer--chars {
-    bottom: 0;
+  .hero__layer--chars picture {
     height: auto;
-    top: auto;
-    left: 50%;
-    right: auto;
-    width: 220vw;
-    max-width: 1100px;
-    translate: -50% 0;
-  }
-  .hero__chars {
-    height: auto;
-    object-fit: contain;
+    width: min(220vw, 1100px);
+    translate: none;
   }
   .hero__bar {
     padding-top: 9rem;
@@ -612,16 +954,8 @@
   .duo__panel {
     min-height: clamp(560px, 100svh, 780px);
   }
-  .duo__text {
-    width: 100%;
-  }
-  .duo__figure {
-    height: 70%;
-  }
-  .duo__panel--jason .duo__figure,
-  .duo__panel--lucia .duo__figure {
-    left: auto;
-    right: -4%;
+  .duo__name {
+    font-size: clamp(3.5rem, 19vw, 7rem);
   }
   .stats__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));

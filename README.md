@@ -73,8 +73,8 @@ src/
 
 Music is off until the visitor turns it on with the equalizer button in the header.
 
-- **Your own track:** save a royalty-free synthwave track as `public/audio/leonida-nights.mp3`. It is picked up automatically and loops. Never use Rockstar or trailer audio, which is copyrighted.
-- **Without a file:** the site plays a short generative synthwave loop built in the browser with the Web Audio API (`src/audio/synth.js`), so no third-party audio ships with the project.
+- **Your own track:** save a track you have the rights to as `public/audio/leonida-nights.mp3`. It is picked up automatically and loops. Rockstar's soundtracks and trailer audio (including the GTA IV and GTA V themes) are copyrighted and are not shipped with this project.
+- **Without a file:** the site plays "Leonida Drive", an original generative West Coast groove built in the browser with the Web Audio API (`src/audio/synth.js`): electric piano, sub bass, a whistle lead and a swung boom-bap kit. No third-party audio ships with the project.
 - The choice is saved in `localStorage`. Music pauses while the tab is hidden and fades out while a trailer plays.
 - The optional UI sounds (hover ticks, clicks, the wipe whoosh) only play while the music is on.
 

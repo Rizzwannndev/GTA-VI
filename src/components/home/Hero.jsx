@@ -11,6 +11,14 @@ import { useVideo } from "../../context/VideoContext";
 import { featuredTrailer } from "../../data/trailers";
 import { OFFICIAL_URL, RELEASE_LABEL } from "../../data/site";
 
+// Rockstar's own one-line premise, split so it can light up word by word.
+const PREMISE = [
+  { text: "Jason and Lucia have always known the deck is stacked against them. But when an easy score goes wrong, they find themselves on the" },
+  { text: "darkest side", tone: "dark" },
+  { text: "of the" },
+  { text: "sunniest place in America.", tone: "sun" },
+];
+
 // The landing scene. On reveal it plays the original "settle" (every layer
 // starts zoomed and rotated and eases into place). On scroll it pins, and the
 // layers pull apart by depth while dusk falls over the bay.
@@ -32,19 +40,32 @@ export default function Hero({ ready }) {
             scrollTrigger: {
               trigger: rootRef.current,
               start: "top top",
-              end: desktop ? "+=140%" : "+=110%",
+              end: desktop ? "+=230%" : "+=190%",
               pin: true,
               scrub: 1,
               anticipatePin: 1,
               invalidateOnRefresh: true,
             },
           })
-          .to(".hero__layer--bg", { scale: 1.16, yPercent: -5 }, 0)
-          .to(".hero__layer--logo", { yPercent: -45, scale: 0.8, autoAlpha: 0 }, 0)
-          .to(".hero__layer--chars", { scale: desktop ? 1.22 : 1.12, yPercent: 14 }, 0)
-          .to(".hero__bar", { autoAlpha: 0, y: 40, duration: 0.25 }, 0)
+          // Depth: the bay drifts slowest and softens like a lens racking
+          // focus, the logo lifts away, the leads walk towards the camera.
+          .to(".hero__layer--bg", { scale: 1.22, yPercent: 6, filter: desktop ? "blur(6px)" : "none" }, 0)
+          .to(".hero__layer--logo", { yPercent: -70, scale: 0.72, autoAlpha: 0 }, 0)
+          .to(".hero__layer--chars", { scale: desktop ? 1.35 : 1.18, yPercent: desktop ? 10 : 6, transformOrigin: "50% 100%" }, 0)
+          .to(".hero__bar", { autoAlpha: 0, y: 60, duration: 0.25 }, 0)
           .to(".hero__dusk", { opacity: 1, duration: 0.6 }, 0.25)
-          .fromTo(".hero__premise", { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 0.4 }, 0.5);
+          .fromTo(".hero__premise", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.15 }, 0.45)
+          // The premise lights up word by word, rising out of a soft blur,
+          // then the sunset underline draws itself beneath the last line.
+          .fromTo(
+            ".hero__premise-word",
+            { opacity: 0.12, yPercent: 30, filter: "blur(6px)" },
+            { opacity: 1, yPercent: 0, filter: "blur(0px)", duration: 0.12, stagger: 0.022 },
+            0.5,
+          )
+          .fromTo(".hero__premise-swash path", { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.25, ease: "power2.inOut" }, ">-0.05")
+          .fromTo(".hero__premise-credit", { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.15 }, "<")
+          .to({}, { duration: 0.25 });
       });
       return () => mm.revert();
     },
@@ -57,15 +78,14 @@ export default function Hero({ ready }) {
       if (!ready) return;
       if (prefersReducedMotion()) {
         gsap.from(".hero__stage", { autoAlpha: 0, duration: 0.6 });
-        gsap.set(".hero__chars", { scale: 0.82 });
         return;
       }
       gsap.fromTo(".hero__stage", { scale: 1.7, rotate: -10 }, { scale: 1, rotate: 0, duration: 2, delay: -1, ease: "expo.inOut" });
       gsap.fromTo(".hero__bg", { scale: 1.7, rotate: -3 }, { scale: 1.1, rotate: 0, duration: 2, delay: -0.8, ease: "expo.inOut" });
       gsap.fromTo(
         ".hero__chars",
-        { scale: 1.9, rotate: -10, opacity: 0 },
-        { scale: 0.82, rotate: 0, opacity: 1, duration: 2, delay: -1, ease: "expo.inOut" },
+        { scale: 1.7, rotate: -10, opacity: 0 },
+        { scale: 1, rotate: 0, opacity: 1, duration: 2, delay: -1, ease: "expo.inOut" },
       );
       gsap.fromTo(".hero__logo", { scale: 1.6, rotate: -10 }, { scale: 1, rotate: 0, duration: 2, delay: -0.95, ease: "expo.inOut" });
       gsap.fromTo(".hero__bar-item", { opacity: 0.1 }, { opacity: 1, duration: 2, delay: -0.5, ease: "expo.inOut" });
@@ -75,22 +95,39 @@ export default function Hero({ ready }) {
     { dependencies: [ready], scope: rootRef },
   );
 
-  // The original mouse parallax on the logo and bay, now cleaned up.
+  // Mouse parallax in two axes. Each layer moves by its depth: the bay a
+  // little against the pointer, the logo with it, the leads furthest,
+  // so the three planes read as separate depths.
   useGSAP(
     () => {
       if (!ready || prefersReducedMotion() || !isFinePointer()) return;
       const root = rootRef.current;
-      const logoX = gsap.quickTo(".hero__logo", "x", { duration: 0.9, ease: "power3" });
-      const bgX = gsap.quickTo(".hero__bg", "x", { duration: 0.9, ease: "power3" });
-      const charsX = gsap.quickTo(".hero__chars", "x", { duration: 1.1, ease: "power3" });
+      const to = (sel, prop, d = 1) => gsap.quickTo(sel, prop, { duration: d, ease: "power3" });
+      const layers = [
+        [".hero__bg", -18, -10, 1.2],
+        [".hero__logo", 22, 12, 1],
+        [".hero__chars", 46, 18, 0.9],
+      ].map(([sel, x, y, d]) => ({ x, y, mx: to(sel, "x", d), my: to(sel, "y", d) }));
       const onMove = (e) => {
-        const xMove = (e.clientX / window.innerWidth - 0.5) * 40;
-        logoX(xMove * 0.2 * (window.innerWidth / 100));
-        bgX(xMove * 1.7);
-        charsX(xMove * -0.6);
+        const nx = e.clientX / window.innerWidth - 0.5;
+        const ny = e.clientY / window.innerHeight - 0.5;
+        for (const l of layers) {
+          l.mx(nx * l.x);
+          l.my(ny * l.y);
+        }
+      };
+      const onLeave = () => {
+        for (const l of layers) {
+          l.mx(0);
+          l.my(0);
+        }
       };
       root.addEventListener("mousemove", onMove);
-      return () => root.removeEventListener("mousemove", onMove);
+      root.addEventListener("mouseleave", onLeave);
+      return () => {
+        root.removeEventListener("mousemove", onMove);
+        root.removeEventListener("mouseleave", onLeave);
+      };
     },
     { dependencies: [ready], scope: rootRef },
   );
@@ -126,8 +163,31 @@ export default function Hero({ ready }) {
 
         <div className="hero__premise">
           <p className="hero__premise-text">
-            Jason and Lucia have always known the deck is stacked against them. But when an easy score goes wrong, they
-            find themselves on the darkest side of the sunniest place in America.
+            <span className="sr-only">{PREMISE.map((c) => c.text).join(" ")}</span>
+            <span aria-hidden="true">
+              {PREMISE.map((chunk, ci) => (
+                <span key={ci} className={chunk.tone ? `hero__premise-${chunk.tone}` : undefined}>
+                  {chunk.text.split(" ").map((w, wi) => (
+                    <span key={wi} className="hero__premise-word">
+                      {w}{" "}
+                    </span>
+                  ))}
+                  {chunk.tone === "sun" && (
+                    <svg className="hero__premise-swash" viewBox="0 0 600 40" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="premise-sun" x1="0" x2="1" y1="0" y2="0">
+                          <stop offset="0" stopColor="#4a3fb8" />
+                          <stop offset="0.35" stopColor="#9b4fd0" />
+                          <stop offset="0.7" stopColor="#ff4f9a" />
+                          <stop offset="1" stopColor="#ff9a52" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M6 28 C 120 10, 260 6, 360 14 S 540 30, 594 12" fill="none" stroke="url(#premise-sun)" strokeWidth="5" strokeLinecap="round" />
+                    </svg>
+                  )}
+                </span>
+              ))}
+            </span>
           </p>
           <p className="hero__premise-credit">From Rockstar Games' description of the story</p>
         </div>

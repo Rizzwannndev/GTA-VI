@@ -17,20 +17,28 @@
   align-items: center;
 }
 .lead__frame {
+  position: relative;
   justify-self: center;
-  width: min(100%, 460px);
-  aspect-ratio: 3 / 5;
-  display: grid;
-  align-items: end;
-  overflow: hidden;
-  background: radial-gradient(70% 55% at 50% 100%, var(--color-raised), transparent 75%);
-  border-bottom: 1px solid var(--line);
+  width: min(100%, 560px);
+  margin: 0;
 }
-.lead__frame picture,
+.lead__frame picture {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-media);
+}
 .lead__frame img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--focus, 50% 40%);
+}
+.lead__credit {
+  margin-top: 0.6rem;
+  font-size: var(--fs-micro);
+  color: var(--color-fog);
 }
 .lead__text {
   display: grid;

@@ -1,6 +1,5 @@
 // Characters as introduced on rockstargames.com/VI/only-in-leonida.
 // Quotes marked `quote` are Rockstar's own lines; `bio` is our paraphrase.
-import { art } from "../assets/images/art";
 import { photos } from "../assets/photos/photos";
 
 export const leads = [
@@ -8,7 +7,9 @@ export const leads = [
     id: "lucia",
     name: "Lucia Caminos",
     first: "Lucia",
-    image: art.lucia,
+    image: photos["lucia-bar"],
+    imageAlt: "Lucia leaning on a motorbike under the neon sign of a liquor bar",
+    focus: "32% 40%",
     quote: "Lucia's father taught her to fight as soon as she could walk.",
     bio: "Fresh out of Leonida Penitentiary and done with second chances, Lucia wants a better life than the one she was handed. Jason looks like her way out.",
     tint: "var(--color-pink)",
@@ -17,7 +18,9 @@ export const leads = [
     id: "jason",
     name: "Jason Duval",
     first: "Jason",
-    image: art.jason,
+    image: photos["jason-night"],
+    imageAlt: "Jason under a palm outside a Vice City club at night, phone in hand",
+    focus: "34% 30%",
     quote: "Jason wants an easy life, but things just keep getting harder.",
     bio: "An Army veteran raised around grifters, Jason now runs jobs for drug runners down in the Keys. Then he meets Lucia.",
     tint: "var(--color-teal)",

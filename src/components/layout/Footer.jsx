@@ -24,8 +24,15 @@ export default function Footer() {
       <h2 id="footer-title" className="sr-only">
         Site footer
       </h2>
-      <Marquee className="footer__marquee" speed={70} label="Only in Leonida">
-        <span className="footer__mega">Only in Leonida</span>
+      {/* Hovering the marquee slows it to a crawl and swells the cursor into
+          a large disc that inverts the letters beneath it. Each word fills
+          in under the pointer. */}
+      <Marquee className="footer__marquee" speed={70} label="Only in Leonida" slowOnHover cursor="big">
+        <span className="footer__mega">
+          <span className="footer__word footer__word--out">Only</span>
+          <span className="footer__word footer__word--out">in</span>
+          <span className="footer__word footer__word--fill">Leonida</span>
+        </span>
         <ViMark className="footer__mark" gradientId="vi-footer-grad" />
       </Marquee>
 

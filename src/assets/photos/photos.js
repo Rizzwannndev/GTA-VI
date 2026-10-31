@@ -120,6 +120,10 @@ import jason_night_avif_1920 from "./jason-night-1920.avif";
 import jason_night_webp_1920 from "./jason-night-1920.webp";
 import jason_night_avif_960 from "./jason-night-960.avif";
 import jason_night_webp_960 from "./jason-night-960.webp";
+import lucia_bar_avif_1920 from "./lucia-bar-1920.avif";
+import lucia_bar_webp_1920 from "./lucia-bar-1920.webp";
+import lucia_bar_avif_960 from "./lucia-bar-960.avif";
+import lucia_bar_webp_960 from "./lucia-bar-960.webp";
 import cast_cal_hampton_avif_1920 from "./cast-cal-hampton-1920.avif";
 import cast_cal_hampton_webp_1920 from "./cast-cal-hampton-1920.webp";
 import cast_cal_hampton_avif_960 from "./cast-cal-hampton-960.avif";
@@ -175,6 +179,7 @@ export const photos = {
   "duo-dusk": { avif: `${duo_dusk_avif_960} 960w, ${duo_dusk_avif_1920} 1920w`, webp: `${duo_dusk_webp_960} 960w, ${duo_dusk_webp_1920} 1920w`, src: duo_dusk_webp_1920, small: duo_dusk_webp_960, width: 1920, height: 1080, credit: "Rockstar Games", source: "Jason_and_Lucia_13", href: "https://www.rockstargames.com/VI/media/screenshots" },
   "lucia-pool": { avif: `${lucia_pool_avif_960} 960w, ${lucia_pool_avif_1920} 1920w`, webp: `${lucia_pool_webp_960} 960w, ${lucia_pool_webp_1920} 1920w`, src: lucia_pool_webp_1920, small: lucia_pool_webp_960, width: 1920, height: 1080, credit: "Rockstar Games", source: "Lucia_Caminos_02", href: "https://www.rockstargames.com/VI/media/screenshots" },
   "jason-night": { avif: `${jason_night_avif_960} 960w, ${jason_night_avif_1920} 1920w`, webp: `${jason_night_webp_960} 960w, ${jason_night_webp_1920} 1920w`, src: jason_night_webp_1920, small: jason_night_webp_960, width: 1920, height: 1080, credit: "Rockstar Games", source: "Jason_Duval_04", href: "https://www.rockstargames.com/VI/media/screenshots" },
+  "lucia-bar": { avif: `${lucia_bar_avif_960} 960w, ${lucia_bar_avif_1920} 1920w`, webp: `${lucia_bar_webp_960} 960w, ${lucia_bar_webp_1920} 1920w`, src: lucia_bar_webp_1920, small: lucia_bar_webp_960, width: 1920, height: 1080, credit: "Rockstar Games", source: "Lucia_Caminos_03", href: "https://www.rockstargames.com/VI/media/screenshots" },
   "cast-cal-hampton": { avif: `${cast_cal_hampton_avif_960} 432w, ${cast_cal_hampton_avif_1920} 864w`, webp: `${cast_cal_hampton_webp_960} 432w, ${cast_cal_hampton_webp_1920} 864w`, src: cast_cal_hampton_webp_1920, small: cast_cal_hampton_webp_960, width: 864, height: 1080, credit: "Rockstar Games", source: "Cal_Hampton_01", href: "https://www.rockstargames.com/VI/media/screenshots" },
   "cast-dre-quan-priest": { avif: `${cast_dre_quan_priest_avif_960} 432w, ${cast_dre_quan_priest_avif_1920} 864w`, webp: `${cast_dre_quan_priest_webp_960} 432w, ${cast_dre_quan_priest_webp_1920} 864w`, src: cast_dre_quan_priest_webp_1920, small: cast_dre_quan_priest_webp_960, width: 864, height: 1080, credit: "Rockstar Games", source: "DreQuan_Priest_03", href: "https://www.rockstargames.com/VI/media/screenshots" },
   "cast-real-dimez": { avif: `${cast_real_dimez_avif_960} 432w, ${cast_real_dimez_avif_1920} 864w`, webp: `${cast_real_dimez_webp_960} 432w, ${cast_real_dimez_webp_1920} 864w`, src: cast_real_dimez_webp_1920, small: cast_real_dimez_webp_960, width: 864, height: 1080, credit: "Rockstar Games", source: "Real_Dimez_03", href: "https://www.rockstargames.com/VI/media/screenshots" },

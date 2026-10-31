@@ -5,9 +5,9 @@ import { revealText } from "../../animations/motion";
 import { locations } from "../../data/locations";
 import Picture from "../ui/Picture";
 
-// The six regions as full-height photo panels. Desktop: the section pins
-// and the reel scrolls sideways with the page. Phones and reduced motion: a
-// native swipeable row with scroll snapping.
+// The six regions as full-height photo panels. The section pins and the
+// reel scrolls sideways with the page on every screen size; under reduced
+// motion it is a native swipeable row with scroll snapping.
 export default function Locations() {
   const rootRef = useRef(null);
   const trackRef = useRef(null);
@@ -16,7 +16,8 @@ export default function Locations() {
     () => {
       revealText(".locations__title", { type: "chars", stagger: 0.02 });
       const mm = gsap.matchMedia();
-      mm.add(`${MQ.desktop} and ${MQ.motion}`, () => {
+      mm.add({ motion: MQ.motion, desktop: MQ.desktop }, (ctx) => {
+        if (!ctx.conditions.motion) return;
         const track = trackRef.current;
         const distance = () => track.scrollWidth - window.innerWidth;
         const tween = gsap.to(track, {
@@ -65,7 +66,7 @@ export default function Locations() {
           <h2 id="locations-title" className="locations__title">
             Six regions, one state
           </h2>
-          <p className="locations__hint">Region names are Rockstar's. Photos are real Florida places that match each one.</p>
+          <p className="locations__hint">Six regions, named and pictured by Rockstar. Pick one to see it on the map.</p>
         </div>
         <div className="locations__viewport" data-cursor="drag">
           <ol ref={trackRef} className="locations__track">
@@ -73,7 +74,7 @@ export default function Locations() {
               <li key={loc.id} className="postcard">
                 <Link to={`/leonida#${loc.id}`} className="postcard__link" data-cursor="view">
                   <div className="postcard__art">
-                    <Picture image={loc.photo} alt="" sizes="(max-width: 900px) 85vw, 42vw" />
+                    <Picture image={loc.photo} alt="" sizes="(max-width: 900px) 80vw, 42vw" />
                   </div>
                   <div className="postcard__body">
                     <h3 className="postcard__name">{loc.name}</h3>
