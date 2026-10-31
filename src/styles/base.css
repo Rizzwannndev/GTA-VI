@@ -48,6 +48,12 @@ html.is-locked body {
   border-radius: 8px;
 }
 
+/* A full screen of height before the lazy page chunk arrives, so the footer
+   never renders at the top and then jumps (layout shift). */
+main {
+  min-height: 100svh;
+}
+
 :focus-visible {
   outline: 2px solid var(--color-paper);
   outline-offset: 4px;

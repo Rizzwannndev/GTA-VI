@@ -21,8 +21,12 @@ function fadeIn(targets, { trigger, start = "top 85%", delay = 0, scroll = true 
  * SplitText instance; autoSplit re-splits on resize and font load.
  */
 export function splitLines(target, { type = "lines", onSplit, ...rest } = {}) {
+  // SplitText labels the parent with aria-label, which is only valid on
+  // elements with a role (headings). Paragraphs keep their real text.
+  const heading = target instanceof Element && /^H[1-6]$/.test(target.tagName);
   return SplitText.create(target, {
     type,
+    aria: heading ? "auto" : "none",
     mask: type === "chars" ? "lines" : type,
     linesClass: "split-line",
     autoSplit: true,

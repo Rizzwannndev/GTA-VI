@@ -32,7 +32,10 @@ export default function Preloader({ handoff, onReveal, onDone }) {
       }
 
       const ready = Promise.race([Promise.all([document.fonts?.ready, pageLoaded()]), wait(4000)]);
-      Promise.all([ready, wait(reduce ? 200 : 1900)]).then(() => {
+      // The minimum is measured from navigation start: on a slow connection
+      // the wait for scripts already counts towards it.
+      const minimum = Math.max(0, (reduce ? 200 : 1900) - performance.now() * 0.5);
+      Promise.all([ready, wait(minimum)]).then(() => {
         if (cancelled) return;
         // Unmounting (after onDone) releases the scroll lock in the cleanup.
         const finish = () => onDone();

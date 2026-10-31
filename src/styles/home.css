@@ -38,6 +38,7 @@
 .hero__logo {
   height: clamp(170px, 34vh, 330px);
   width: auto;
+  object-fit: contain;
   filter: drop-shadow(0 18px 40px rgb(0 0 0 / 0.45));
 }
 .hero__layer--chars {
