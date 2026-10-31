@@ -19,6 +19,7 @@ import Icon from "../ui/Icon";
 export default function Menu({ open, onClose }) {
   const rootRef = useRef(null);
   const cardRef = useRef(null);
+  const tlRef = useRef(null);
   const { pathname } = useLocation();
   const { track, playing } = useMusic();
   const follow = useMediaQuery(`${MQ.desktop} and ${MQ.fine} and ${MQ.motion}`);
@@ -54,18 +55,24 @@ export default function Menu({ open, onClose }) {
     () => {
       if (!visible) return;
       const reduce = prefersReducedMotion();
+      // Whichever way it is going, the other direction's timeline stops, so
+      // a quick open-then-close never leaves two timelines fighting.
+      tlRef.current?.kill();
       if (open) {
         if (reduce) {
-          gsap.fromTo(rootRef.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 });
+          tlRef.current = gsap.fromTo(rootRef.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 });
           return;
         }
-        gsap
+        tlRef.current = gsap
           .timeline()
           .set(rootRef.current, { autoAlpha: 1 })
+          .set(".menu__inner", { autoAlpha: 1 })
           .fromTo(".menu__panel", { yPercent: -101 }, { yPercent: 0, duration: 0.85, stagger: 0.09, ease: "wipe" })
           .fromTo(".menu__ambient", { autoAlpha: 0, scale: 1.25 }, { autoAlpha: 1, scale: 1, duration: 1.6, ease: "expo.out" }, 0.55)
-          .fromTo(".menu__word", { yPercent: 115, rotate: 6 }, { yPercent: 0, rotate: 0, duration: 1.05, stagger: 0.055, ease: "vice" }, 0.5)
-          .fromTo(".menu__meta", { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.04 }, 0.95)
+          // The names rise only once the black panel has covered the page,
+          // from far enough below their masks that no edge shows early.
+          .fromTo(".menu__word", { yPercent: 140 }, { yPercent: 0, duration: 1, stagger: 0.05, ease: "vice" }, 0.72)
+          .fromTo(".menu__meta", { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.04 }, 1.1)
           .fromTo(".menu__rule", { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: "expo.inOut" }, 0.7)
           .fromTo(".menu__info > *", { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.06 }, 0.9);
       } else {
@@ -74,14 +81,20 @@ export default function Menu({ open, onClose }) {
           setHover(null);
         };
         if (reduce) {
-          gsap.to(rootRef.current, { autoAlpha: 0, duration: 0.25, onComplete: done });
+          tlRef.current = gsap.to(rootRef.current, { autoAlpha: 0, duration: 0.25, onComplete: done });
           return;
         }
-        gsap
+        tlRef.current = gsap
           .timeline({ onComplete: done })
-          .to(".menu__word", { yPercent: -115, duration: 0.45, stagger: 0.02, ease: "power3.in" })
+          // Each letter carries its roll copy as a text shadow just below it,
+          // so the names leave downwards: sliding up would pull that copy
+          // into the mask and leave the names on screen.
+          .to(".menu__word", { yPercent: 140, duration: 0.36, stagger: 0.012, ease: "power3.in" })
           .to(".menu__meta, .menu__info > *, .menu__rule, .menu__card, .menu__ambient", { autoAlpha: 0, duration: 0.3 }, 0)
-          .to([...rootRef.current.querySelectorAll(".menu__panel")].reverse(), { yPercent: 101, duration: 0.7, stagger: 0.07, ease: "wipe" }, 0.25);
+          // Nothing of the menu's content survives past this point, so the
+          // page is never seen through the panels with names still on it.
+          .set(".menu__inner", { autoAlpha: 0 }, 0.46)
+          .to([...rootRef.current.querySelectorAll(".menu__panel")].reverse(), { yPercent: 101, duration: 0.7, stagger: 0.07, ease: "wipe" }, 0.4);
       }
     },
     { dependencies: [open, visible], scope: rootRef },
