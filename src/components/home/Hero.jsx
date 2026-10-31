@@ -201,7 +201,8 @@ export default function Hero({ ready }) {
             <PlatformMarks className="hero__platforms" />
             <div className="hero__actions">
               <Button icon="play" onClick={(e) => openVideo(featuredTrailer, e.currentTarget)}>
-                Watch the {featuredTrailer.title}
+                <span className="hero__label-long">Watch the {featuredTrailer.title}</span>
+                <span className="hero__label-short">Watch trailer</span>
               </Button>
               <Button href={OFFICIAL_URL} variant="ghost" icon="arrowUpRight" magnetic={false}>
                 Pre-order

@@ -320,14 +320,23 @@
   transform: translateY(4px) scaleX(0.6);
   transform-origin: right;
 }
-.menu-btn:hover .menu-btn__line:last-child,
 .menu-btn:focus-visible .menu-btn__line:last-child {
   transform: translateY(4px) scaleX(1);
 }
-.menu-btn:hover,
+@media (hover: hover) {
+  .menu-btn:hover .menu-btn__line:last-child {
+    transform: translateY(4px) scaleX(1);
+  }
+}
 .menu-btn:focus-visible {
   background: #ff4f9a;
   color: #000;
+}
+@media (hover: hover) {
+  .menu-btn:hover {
+    background: #ff4f9a;
+    color: #000;
+  }
 }
 .menu-btn:active {
   background: #e8e8e8;
@@ -365,10 +374,15 @@
     border-color 0.3s ease,
     background-color 0.3s ease;
 }
-.eq:hover,
 .eq:focus-visible {
   border-color: var(--color-paper);
   background: rgb(0 0 0 / 0.7);
+}
+@media (hover: hover) {
+  .eq:hover {
+    border-color: var(--color-paper);
+    background: rgb(0 0 0 / 0.7);
+  }
 }
 .eq.is-playing .eq__bars {
   color: #ff4f9a;
@@ -384,7 +398,9 @@
   height: 100%;
   background: currentColor;
   transform-origin: bottom;
-  transform: scaleY(0.2);
+  /* At rest the bars hold a still equaliser shape, so the control reads as
+     sound even with its label hidden. */
+  transform: scaleY(var(--rest, 0.4));
   transition: transform 0.4s var(--ease-out);
 }
 .eq.is-playing .eq__bar {
@@ -415,7 +431,29 @@
     transform: scaleY(0.45);
   }
 }
+.eq__bar:nth-child(1) {
+  --rest: 0.35;
+}
+.eq__bar:nth-child(2) {
+  --rest: 0.7;
+}
+.eq__bar:nth-child(3) {
+  --rest: 1;
+}
+.eq__bar:nth-child(4) {
+  --rest: 0.55;
+}
+.eq__bar:nth-child(5) {
+  --rest: 0.3;
+}
 @media (max-width: 599px) {
+  .eq,
+  .menu-btn {
+    width: 44px;
+    min-width: 44px;
+    padding: 0;
+    justify-content: center;
+  }
   .eq__label,
   .menu-btn__label {
     position: absolute;
@@ -967,22 +1005,6 @@ html.has-cursor :is(iframe, select) {
 .cursor.has-label .cursor__label {
   opacity: 1;
   transform: none;
-}
-
-/* ---------- Intro ---------- */
-.intro {
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-intro);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: #000;
-}
-.intro svg {
-  width: 100%;
-  height: 100%;
 }
 
 /* ---------- Platforms ---------- */

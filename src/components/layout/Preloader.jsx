@@ -9,10 +9,10 @@ const pageLoaded = () =>
   new Promise((r) => (document.readyState === "complete" ? r() : window.addEventListener("load", r, { once: true })));
 
 // First-load screen: the VI mark and two palms draw themselves in line, the
-// mark fills with the sunset, then the screen hands over. On the home page it
-// fades into the black of the intro; elsewhere it wipes up off the page.
+// mark fills with the sunset, then the screen wipes up off the page and the
+// page underneath plays its entrance. It is the site's only opening animation.
 // It waits for fonts and the page's eager images, capped at four seconds.
-export default function Preloader({ handoff, onReveal, onDone }) {
+export default function Preloader({ onReveal, onDone }) {
   const rootRef = useRef(null);
 
   useGSAP(
@@ -48,8 +48,7 @@ export default function Preloader({ handoff, onReveal, onDone }) {
         tl.to(".preloader__fill", { autoAlpha: 1, duration: 0.45, ease: "power1.out" })
           .to(".preloader__stage", { autoAlpha: 0, scale: 0.94, duration: 0.5, ease: "power2.in" }, "+=0.3")
           .call(onReveal);
-        if (handoff) tl.to(rootRef.current, { autoAlpha: 0, duration: 0.4 });
-        else tl.to(rootRef.current, { yPercent: -100, duration: 0.9, ease: "wipe" }, "-=0.05");
+        tl.to(rootRef.current, { yPercent: -100, duration: 0.9, ease: "wipe" }, "-=0.05");
       });
 
       return () => {

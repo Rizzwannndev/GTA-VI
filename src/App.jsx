@@ -19,8 +19,6 @@ function App() {
   useScrollRefresh();
   const location = useRouteTransition();
   const [booting, setBooting] = useState(true);
-  // The home intro takes over straight from the preloader.
-  const [handoff] = useState(() => location.pathname === "/");
 
   useEffect(() => {
     initSmoothScroll();
@@ -53,7 +51,7 @@ function App() {
       <Footer />
       <VideoModal />
       <PageTransition />
-      {booting && <Preloader handoff={handoff} onReveal={() => stage.set({ revealed: true })} onDone={() => setBooting(false)} />}
+      {booting && <Preloader onReveal={() => stage.set({ revealed: true })} onDone={() => setBooting(false)} />}
       <Grain />
       <Cursor />
     </VideoProvider>

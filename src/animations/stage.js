@@ -1,11 +1,10 @@
 // A tiny external store for the "stage": whether the current page is visible
-// yet (the preloader and page transitions hold it back), and whether this is
-// the first reveal of the session (the home intro only plays then).
+// yet (the preloader and page transitions hold it back), and whether a
+// transition panel is covering it.
 import { useSyncExternalStore } from "react";
 
 let state = {
   revealed: false,
-  firstReveal: true,
   covered: false,
 };
 const listeners = new Set();

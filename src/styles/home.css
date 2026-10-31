@@ -976,10 +976,82 @@
     border-top: 1px solid var(--line);
   }
 }
-@media (max-width: 479.98px) {
-  .hero__actions .btn {
-    flex: 1 1 100%;
+.hero__label-short {
+  display: none;
+}
+/* Phones in portrait: the logo sits under the header, the leads stand just
+   below it, and a deep fade carries the date and both actions in one
+   thumb-reach row at the bottom. */
+@media (max-width: 599.98px) and (orientation: portrait) {
+  .hero__logo-pos {
+    top: calc(var(--header-h) + 2svh);
+    translate: -50% 0;
   }
+  .hero__logo {
+    height: min(24svh, 52vw);
+  }
+  .hero__layer--chars {
+    display: block;
+  }
+  /* The art's top edge sits just above the logo's base, so the heads
+     (about 4% of the picture's width below that edge) meet it exactly. */
+  .hero__layer--chars picture {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--header-h) + 2svh + min(24svh, 52vw) - 1.5rem);
+    width: min(205vw, 880px);
+    translate: -50% 0;
+  }
+  .hero__bar {
+    padding: 7rem var(--gutter) max(1.25rem, env(safe-area-inset-bottom));
+    background: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 0) 0%,
+      rgb(0 0 0 / 0.72) 32%,
+      rgb(0 0 0 / 0.94) 58%,
+      #000 100%
+    );
+  }
+  .hero__info {
+    width: 100%;
+    gap: 0.85rem;
+  }
+  .hero__date {
+    font-size: min(var(--fs-h3), 7.4vw);
+    white-space: nowrap;
+  }
+  .hero__actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.35rem;
+  }
+  .hero__actions .btn {
+    min-height: 52px;
+    padding-inline: 0.75rem;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .hero__label-long {
+    display: none;
+  }
+  .hero__label-short {
+    display: inline;
+  }
+}
+@media (max-width: 374.98px) and (orientation: portrait) {
+  .hero__actions .btn {
+    padding-inline: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.01em;
+  }
+  .hero__actions .btn__label {
+    gap: 0.4em;
+  }
+}
+@media (max-width: 479.98px) {
   .stats__list {
     grid-template-columns: 1fr;
   }

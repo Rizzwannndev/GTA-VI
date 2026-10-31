@@ -1,6 +1,6 @@
 # Leonida Unofficial: a Grand Theft Auto VI fan site
 
-A fan-made guide to Grand Theft Auto VI, built as a motion-design practice project. It opens with the VI intro, then covers Rockstar's trailers, the characters, the state of Leonida, its vehicles and the November 19, 2026 launch.
+A fan-made guide to Grand Theft Auto VI, built as a motion-design practice project. It opens with a line-drawn VI preloader, then covers Rockstar's trailers, the characters, the state of Leonida, its vehicles and the November 19, 2026 launch.
 
 Live: https://gta-vi-iota-one.vercel.app/
 
@@ -8,7 +8,7 @@ Live: https://gta-vi-iota-one.vercel.app/
 
 ## What's inside
 
-- **Intro and home.** The original VI intro opens the site. After it, the home page has a pinned hero whose layers pull apart on scroll, a trailer feature, kinetic type, a horizontal scroll of the six regions, Jason and Lucia, live counters and a call to action.
+- **Preloader and home.** The VI mark and two palms draw themselves while the site loads, then wipe up onto a pinned hero whose layers pull apart on scroll, a trailer feature, kinetic type, a horizontal scroll of the six regions, Jason and Lucia, live counters and a call to action.
 - **Ten routes.** Home, Characters, Leonida (an interactive SVG map), Vehicles (a drag carousel), Gallery (a lightbox that opens with Flip), Trailers, News (animated filters), Editions, About/Contact (a validated form) and a "Wasted" 404.
 - **Full-screen menu.** Panels wipe in and huge links rise from masks. Hovering a link dims the others, swaps it to an outline and fades in a preview. Esc closes the menu, focus is trapped and scroll is locked.
 - **Page transitions.** One panel wipe with the destination name, used by links, the menu and the browser's back and forward buttons.
@@ -46,7 +46,7 @@ It deploys to Vercel as-is. `vercel.json` rewrites every path to the SPA and cac
 src/
 ├── animations/   GSAP setup, motion helpers, Lenis, page transition, stage store, media bus
 ├── assets/
-│   ├── images/   project artwork (intro bay, logo, character cut-outs), WebP/AVIF
+│   ├── images/   project artwork (hero bay, logo, character cut-outs), WebP/AVIF
 │   └── photos/   official GTA VI screenshots, WebP/AVIF, credits in photos.js
 ├── audio/        music store, generative synthwave loop, UI sounds
 ├── components/
