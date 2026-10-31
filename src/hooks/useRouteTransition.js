@@ -5,6 +5,7 @@ import { stage } from "../animations/stage";
 import { lockScroll, scrollToTop, unlockScroll } from "../animations/smooth";
 import { coverScreen, revealScreen } from "../animations/transition";
 import { findRoute } from "../data/routes";
+import { uiSound } from "../audio/music";
 
 const frame = () => new Promise((r) => requestAnimationFrame(() => r()));
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -40,6 +41,7 @@ export function useRouteTransition() {
       let navigated = false;
       while (latest.current.pathname !== shownPath.current) {
         const route = findRoute(latest.current.pathname);
+        uiSound("whoosh");
         await Promise.all([coverScreen(route.name), route.load?.().catch(() => {})]);
 
         const next = latest.current;

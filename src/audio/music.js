@@ -119,6 +119,49 @@ export async function setMusic(onValue) {
 
 export const toggleMusic = () => setMusic(!state.on);
 
+// Optional UI sounds: a soft tick on hover, a blip on click and a filtered
+// noise whoosh for the menu and page wipes. Synthesised on the music's own
+// context and only heard while the music is audible, so a muted site (or a
+// playing trailer) stays silent.
+let whooshNoise = null;
+export function uiSound(kind) {
+  if (!ctx || !audible() || ctx.state !== "running") return;
+  const t = ctx.currentTime;
+  const out = ctx.createGain();
+  out.connect(ctx.destination);
+  if (kind === "whoosh") {
+    if (!whooshNoise) {
+      whooshNoise = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+      const data = whooshNoise.getChannelData(0);
+      for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+    }
+    const src = ctx.createBufferSource();
+    src.buffer = whooshNoise;
+    const band = ctx.createBiquadFilter();
+    band.type = "bandpass";
+    band.Q.value = 0.9;
+    band.frequency.setValueAtTime(260, t);
+    band.frequency.exponentialRampToValueAtTime(2800, t + 0.55);
+    out.gain.setValueAtTime(0, t);
+    out.gain.linearRampToValueAtTime(0.07, t + 0.18);
+    out.gain.exponentialRampToValueAtTime(0.0001, t + 0.75);
+    src.connect(band).connect(out);
+    src.start(t);
+    src.stop(t + 0.8);
+    return;
+  }
+  const [from, to, gain, dur] = kind === "click" ? [700, 340, 0.05, 0.09] : [1900, 1500, 0.016, 0.045];
+  const osc = ctx.createOscillator();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(from, t);
+  osc.frequency.exponentialRampToValueAtTime(to, t + dur);
+  out.gain.setValueAtTime(gain, t);
+  out.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  osc.connect(out);
+  osc.start(t);
+  osc.stop(t + dur + 0.02);
+}
+
 export const music = {
   get: () => state,
   subscribe: (fn) => {
@@ -150,6 +193,24 @@ export function initMusic() {
     ducked = false;
     applyLevel();
   });
+  // Ticks on the main controls, blips on any click (the menu button has its
+  // own whoosh instead).
+  const TICK = ".menu__link, .btn, .menu-btn, .chip, .facade__frame, .eq";
+  let hovered = null;
+  const onOver = (e) => {
+    if (e.pointerType !== "mouse") return;
+    const el = e.target.closest?.(TICK);
+    if (el === hovered) return;
+    hovered = el;
+    if (el) uiSound("tick");
+  };
+  const onClick = (e) => {
+    if (e.target.closest?.(".menu-btn, [data-music-toggle]")) return;
+    if (e.target.closest?.("a, button")) uiSound("click");
+  };
+  document.addEventListener("pointerover", onOver);
+  document.addEventListener("click", onClick, true);
+
   let offGesture = () => {};
   if (readPref()) {
     const resume = (e) => {
@@ -167,6 +228,8 @@ export function initMusic() {
   return () => {
     wired = false;
     document.removeEventListener("visibilitychange", onVisibility);
+    document.removeEventListener("pointerover", onOver);
+    document.removeEventListener("click", onClick, true);
     offStart();
     offStop();
     offGesture();

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { magnetic } from "../../animations/motion";
+import { uiSound } from "../../audio/music";
 import Logo from "./Logo";
 import MusicToggle from "./MusicToggle";
 import Menu from "./Menu";
@@ -58,7 +59,10 @@ export default function Header() {
             ref={toggleRef}
             type="button"
             className={`menu-btn ${open ? "is-open" : ""}`}
-            onClick={() => setOpen((o) => !o)}
+            onClick={() => {
+              uiSound("whoosh");
+              setOpen((o) => !o);
+            }}
             aria-expanded={open}
             aria-controls={open ? "site-menu" : undefined}
             aria-label={open ? "Close menu" : "Open menu"}
