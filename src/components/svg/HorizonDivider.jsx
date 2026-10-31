@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "../../animations/gsap";
 
-// A horizon line with a half sun that draws itself as it scrolls into view.
+// A hairline rule that draws outward from its centre as it scrolls into view.
 export default function HorizonDivider({ className = "" }) {
   const ref = useRef(null);
   useGSAP(
@@ -17,10 +17,9 @@ export default function HorizonDivider({ className = "" }) {
     { scope: ref },
   );
   return (
-    <svg ref={ref} className={`horizon ${className}`} viewBox="0 0 1200 80" fill="none" aria-hidden="true">
-      <path d="M0 64 H1200" stroke="var(--color-pink)" strokeWidth="1.5" />
-      <path d="M548 64 A52 52 0 0 1 652 64" stroke="var(--color-orange)" strokeWidth="1.5" />
-      <path d="M560 52 H640 M568 42 H632 M580 32 H620" stroke="var(--color-gold)" strokeWidth="1.2" />
+    <svg ref={ref} className={`horizon ${className}`} viewBox="0 0 1200 24" fill="none" aria-hidden="true">
+      <path d="M0 12 H1200" stroke="currentColor" strokeWidth="1" />
+      <path d="M0 4 V20 M1200 4 V20" stroke="currentColor" strokeWidth="1" />
     </svg>
   );
 }

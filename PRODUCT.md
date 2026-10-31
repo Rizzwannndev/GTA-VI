@@ -19,7 +19,10 @@ craft: scroll choreography, transitions, type, and performance.
 ## Brand commitments
 - The home intro (the city revealed through the letters VI, which then zooms past the camera) is the
   soul of the site and stays.
-- Pricedown is the display voice. The palette is the Vice City sunset of the existing logo and art.
+- Visual standard (chosen by the owner on 2026-10-31): the official-game-site category standard, played
+  straight at studio craft. Bar: rockstargames.com/VI (imagery, layout) and sidewave.it (menu, motion).
+  Black ground, white type, colour from photography and the VI logo only. The earlier Pricedown and
+  violet-neon look was rejected.
 - The site names itself as unofficial and does not present itself as Rockstar.
 
 ## Platforms

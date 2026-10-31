@@ -1,0 +1,93 @@
+// Official milestones, oldest last. Each item links to its primary source:
+// a Rockstar Newswire post or the video on Rockstar's YouTube channel.
+export const NEWS_CATEGORIES = ["Trailers", "Release date", "Pre-orders", "Reveals"];
+
+export const news = [
+  {
+    id: "launch-trailer",
+    date: "2026-10-15",
+    category: "Trailers",
+    title: "The Launch Trailer is out",
+    summary: "Rockstar's final trailer before release ends on the date: November 19, 2026.",
+    source: { label: "Watch on YouTube", href: "https://www.youtube.com/watch?v=rz1B4B2yBZY" },
+    youtubeId: "rz1B4B2yBZY",
+  },
+  {
+    id: "extended-look",
+    date: "2026-08-27",
+    category: "Trailers",
+    title: "An Extended Look premieres",
+    summary: "A 26-minute tour of Leonida. Rockstar age-restricted it, so it plays on YouTube rather than in embeds.",
+    source: { label: "Watch on YouTube", href: "https://www.youtube.com/watch?v=tJbzMqJGH4k" },
+    youtubeId: "tJbzMqJGH4k",
+  },
+  {
+    id: "extended-look-date",
+    date: "2026-08-06",
+    category: "Reveals",
+    title: "Extended Look dated for August 27",
+    summary: "A 25-second teaser set the premiere date for the long-form video.",
+    source: { label: "Watch on YouTube", href: "https://www.youtube.com/watch?v=qq76pQsI1iw" },
+    youtubeId: "qq76pQsI1iw",
+  },
+  {
+    id: "pre-orders",
+    date: "2026-06-25",
+    category: "Pre-orders",
+    title: "Pre-orders open",
+    summary: "Digital pre-orders opened on June 25 across the PlayStation and Xbox stores and select retailers.",
+    source: {
+      label: "Read on Rockstar Newswire",
+      href: "https://www.rockstargames.com/newswire/article/517oa135328155/grand-theft-auto-vi-pre-orders-begin-on-june-25",
+    },
+    youtubeId: "EiQEBYDox_k",
+  },
+  {
+    id: "cover-art",
+    date: "2026-06-18",
+    category: "Reveals",
+    title: "Official cover art revealed",
+    summary: "The box art arrived a week ahead of pre-orders.",
+    source: { label: "Watch on YouTube", href: "https://www.youtube.com/watch?v=EiQEBYDox_k" },
+    youtubeId: "EiQEBYDox_k",
+  },
+  {
+    id: "delay-november",
+    date: "2025-11-06",
+    category: "Release date",
+    title: "Launch moves to November 19, 2026",
+    summary: "Rockstar moved the release from May 26 to Thursday, November 19, 2026, to finish polishing the game.",
+    source: {
+      label: "Read on Rockstar Newswire",
+      href: "https://www.rockstargames.com/newswire/article/ak3ak31a49a221/grand-theft-auto-vi-is-now-set-to-launch-november-19-2026",
+    },
+    youtubeId: "VQRLujxTm3c",
+  },
+  {
+    id: "trailer-2",
+    date: "2025-05-06",
+    category: "Trailers",
+    title: "Trailer 2 introduces the cast",
+    summary: "Jason, Lucia and the people of Leonida, alongside a new official site full of screenshots and character pages.",
+    source: { label: "Watch on YouTube", href: "https://www.youtube.com/watch?v=VQRLujxTm3c" },
+    youtubeId: "VQRLujxTm3c",
+  },
+  {
+    id: "delay-may",
+    date: "2025-05-02",
+    category: "Release date",
+    title: "First firm date: May 26, 2026",
+    summary: "The game slipped out of its fall 2025 window and got its first exact release date.",
+    source: { label: "Rockstar Newswire", href: "https://www.rockstargames.com/newswire" },
+    youtubeId: "QdBZY2fkU-0",
+  },
+  {
+    id: "trailer-1",
+    date: "2023-12-04",
+    category: "Trailers",
+    title: "Trailer 1 reveals Grand Theft Auto VI",
+    summary: "The first look at Lucia, Jason and modern-day Vice City, set to Tom Petty's \"Love Is a Long Road.\"",
+    source: { label: "Watch on YouTube", href: "https://www.youtube.com/watch?v=QdBZY2fkU-0" },
+    youtubeId: "QdBZY2fkU-0",
+  },
+];

@@ -16,7 +16,6 @@ export const DISCLAIMER =
 export const AUTHOR = {
   name: "Rizwan Waseem",
   url: "https://www.linkedin.com/in/rizwan-waseem",
-  email: "razaatrader25@gmail.com",
 };
 
 // Rockstar's official channels.

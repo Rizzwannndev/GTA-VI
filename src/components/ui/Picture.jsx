@@ -23,7 +23,7 @@ export default function Picture({
         loading={loading}
         decoding="async"
         fetchPriority={fetchPriority}
-        className={imgClassName ?? className}
+        className={[className, imgClassName].filter(Boolean).join(" ") || undefined}
         {...rest}
       />
     );

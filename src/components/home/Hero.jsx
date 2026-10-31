@@ -5,13 +5,17 @@ import { art } from "../../assets/images/art";
 import Picture from "../ui/Picture";
 import Icon from "../ui/Icon";
 import PlatformMarks from "../ui/PlatformMarks";
-import PalmLine from "../svg/PalmLine";
+import Button from "../ui/Button";
+import { useVideo } from "../../context/VideoContext";
+import { featuredTrailer } from "../../data/trailers";
+import { OFFICIAL_URL, RELEASE_LABEL } from "../../data/site";
 
 // The landing scene. On reveal it plays the original "settle" (every layer
 // starts zoomed and rotated and eases into place). On scroll it pins, and the
 // layers pull apart by depth while dusk falls over the bay.
 export default function Hero({ ready }) {
   const rootRef = useRef(null);
+  const { openVideo } = useVideo();
 
   // Scroll choreography, set up once on mount so pin spacing exists before
   // the sections below measure themselves.
@@ -37,8 +41,6 @@ export default function Hero({ ready }) {
           .to(".hero__layer--bg", { scale: 1.16, yPercent: -5 }, 0)
           .to(".hero__layer--logo", { yPercent: -45, scale: 0.8, autoAlpha: 0 }, 0)
           .to(".hero__layer--chars", { scale: desktop ? 1.22 : 1.12, yPercent: 14 }, 0)
-          .to(".hero__palm--l", { xPercent: -55, yPercent: 8 }, 0)
-          .to(".hero__palm--r", { xPercent: 55, yPercent: 8 }, 0)
           .to(".hero__bar", { autoAlpha: 0, y: 40, duration: 0.25 }, 0)
           .to(".hero__dusk", { opacity: 1, duration: 0.6 }, 0.25)
           .fromTo(".hero__premise", { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 0.4 }, 0.5);
@@ -66,7 +68,7 @@ export default function Hero({ ready }) {
       );
       gsap.fromTo(".hero__logo", { scale: 1.6, rotate: -10 }, { scale: 1, rotate: 0, duration: 2, delay: -0.95, ease: "expo.inOut" });
       gsap.fromTo(".hero__bar-item", { opacity: 0.1 }, { opacity: 1, duration: 2, delay: -0.5, ease: "expo.inOut" });
-      gsap.from(".hero__palm path", { drawSVG: 0, duration: 2.4, delay: 0.6, stagger: 0.04, ease: "power2.inOut" });
+      gsap.from(".hero__info > *", { y: 30, autoAlpha: 0, stagger: 0.08, duration: 1.2, delay: 0.5, ease: "vice" });
     },
     { dependencies: [ready], scope: rootRef },
   );
@@ -104,7 +106,6 @@ export default function Hero({ ready }) {
             fetchPriority="high"
           />
         </div>
-        <div className="hero__sun" aria-hidden="true" />
         <div className="hero__layer hero__layer--logo">
           <div className="hero__logo-pos">
             <Picture image={art.logo} alt="Grand Theft Auto VI" imgClassName="hero__logo" loading="eager" sizes="(max-width: 900px) 70vw, 560px" />
@@ -119,8 +120,6 @@ export default function Hero({ ready }) {
             sizes="(max-width: 900px) 200vw, 100vw"
           />
         </div>
-        <PalmLine className="hero__palm hero__palm--l" />
-        <PalmLine className="hero__palm hero__palm--r" flip />
         <div className="hero__dusk" aria-hidden="true" />
 
         <div className="hero__premise">
@@ -132,17 +131,28 @@ export default function Hero({ ready }) {
         </div>
 
         <div className="hero__bar">
-          <button
-            type="button"
-            className="hero__bar-item hero__scroll"
-            onClick={() => scrollToTarget("#welcome")}
-            data-cursor="link"
-          >
-            <Icon name="arrowDown" size="1.6rem" />
-            <span>Scroll down</span>
-          </button>
-          <PlatformMarks className="hero__bar-item hero__platforms" />
-          <Picture image={art.pegi} alt="PEGI 18" imgClassName="hero__bar-item hero__pegi" sizes="70px" loading="eager" />
+          <div className="hero__info">
+            <p className="hero__date">
+              <span className="sr-only">Release date: </span>
+              {RELEASE_LABEL}
+            </p>
+            <PlatformMarks className="hero__platforms" />
+            <div className="hero__actions">
+              <Button icon="play" onClick={(e) => openVideo(featuredTrailer, e.currentTarget)}>
+                Watch the {featuredTrailer.title}
+              </Button>
+              <Button href={OFFICIAL_URL} variant="ghost" icon="arrowUpRight" magnetic={false}>
+                Pre-order
+              </Button>
+            </div>
+          </div>
+          <div className="hero__aside">
+            <button type="button" className="hero__bar-item hero__scroll" onClick={() => scrollToTarget("#welcome")} data-cursor="link">
+              <Icon name="arrowDown" size="1.25rem" />
+              <span>Scroll</span>
+            </button>
+            <Picture image={art.pegi} alt="PEGI 18" imgClassName="hero__bar-item hero__pegi" sizes="56px" loading="eager" />
+          </div>
         </div>
       </div>
     </section>

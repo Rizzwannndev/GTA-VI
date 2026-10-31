@@ -6,9 +6,9 @@ import HorizonDivider from "../svg/HorizonDivider";
 import { bayUrl } from "../../assets/images/art";
 
 const lines = [
-  { text: "Welcome to", kind: "outline", drift: -18 },
-  { text: "Leonida", kind: "image", drift: 14 },
-  { text: RELEASE_LABEL, kind: "outline", drift: -12 },
+  { text: "Welcome to", kind: "outline", drift: -5 },
+  { text: "Leonida", kind: "image", drift: 4 },
+  { text: RELEASE_LABEL, kind: "outline", drift: -4 },
 ];
 
 // Kinetic type: three huge lines slide against each other with the scroll.
@@ -62,7 +62,7 @@ export default function Welcome() {
       </h2>
       <div className="kinetic" aria-hidden="true">
         {lines.map((l) => (
-          <div key={l.text} className={`kinetic__line kinetic__line--${l.kind}`} data-drift={l.drift}>
+          <div key={l.text} className={`kinetic__line kinetic__line--${l.kind}`} data-drift={l.drift} style={{ "--len": l.text.length }}>
             {l.kind === "outline" ? (
               <>
                 <span className="kinetic__outline">{l.text}</span>

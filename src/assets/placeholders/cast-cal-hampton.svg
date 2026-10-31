@@ -1,10 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Placeholder portrait: cal hampton"><defs><linearGradient id="p" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a6ee0"/><stop offset="1" stop-color="#30e3d0"/></linearGradient>
-    <radialGradient id="h" cx=".5" cy=".35" r=".6"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
-    <rect width="1600" height="1000" fill="url(#p)"/>
-    <rect width="1600" height="1000" fill="url(#h)"/>
-    <rect y="0" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="72" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="144" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="216" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="288" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="360" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="432" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="504" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="576" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="648" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="720" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="792" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="864" width="1600" height="2" fill="#0c0820" opacity=".18"/><rect y="936" width="1600" height="2" fill="#0c0820" opacity=".18"/>
-    <g transform="rotate(-10.4 800 1000)" fill="#0c0820">
-      <ellipse cx="800" cy="430" rx="150" ry="180"/>
-      <path d="M800,600 C560,600 420,720 380,1000 L1220,1000 C1180,720 1040,600 800,600 Z"/>
-      <rect x="745" y="560" width="110" height="80"/>
-    </g><filter id="g"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 -.2"/></filter><rect width="1600" height="1000" filter="url(#g)" opacity=".18" style="mix-blend-mode:overlay"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Placeholder portrait: cal hampton"><defs>
+    <radialGradient id="bg" cx="0.82" cy="0.3" r="0.95"><stop offset="0" stop-color="#4a4a4a"/><stop offset="0.55" stop-color="#1c1c1c"/><stop offset="1" stop-color="#0a0a0a"/></radialGradient>
+    <linearGradient id="rim" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset=".18" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <g transform="rotate(-3.4 400 1000)">
+    <g fill="#050505">
+      <ellipse cx="400" cy="420" rx="128" ry="158"/>
+      <rect x="352" y="540" width="96" height="90"/>
+      <path d="M400 610 C210 610 120 720 90 1000 L710 1000 C680 720 590 610 400 610 Z"/>
+    </g>
+    <g fill="url(#rim)">
+      <ellipse cx="400" cy="420" rx="128" ry="158"/>
+      <path d="M400 610 C210 610 120 720 90 1000 L710 1000 C680 720 590 610 400 610 Z"/>
+    </g>
+  </g></svg>

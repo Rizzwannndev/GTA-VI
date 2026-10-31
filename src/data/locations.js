@@ -1,19 +1,16 @@
 // The six regions Rockstar names on rockstargames.com/VI. Region names are
 // official; the `note` text is our own fan write-up from the trailers and
-// the official page, not Rockstar copy. `art` files are placeholders.
-import viceCity from "../assets/placeholders/location-vice-city.svg";
-import keys from "../assets/placeholders/location-leonida-keys.svg";
-import grassrivers from "../assets/placeholders/location-grassrivers.svg";
-import portGellhorn from "../assets/placeholders/location-port-gellhorn.svg";
-import ambrosia from "../assets/placeholders/location-ambrosia.svg";
-import kalaga from "../assets/placeholders/location-mount-kalaga.svg";
+// the official page, not Rockstar copy. Photos are real-world stand-ins
+// (Florida places that match each region), credited from photos.js.
+import { photos } from "../assets/photos/photos";
 
 export const locations = [
   {
     id: "vice-city",
     name: "Vice City",
     short: "Vice City",
-    art: viceCity,
+    photo: photos["vice-city"],
+    art: photos["vice-city"].src,
     tone: "#ff3d8b",
     kicker: "The sun and fun capital of America",
     note: "Neon, high-rises and a beach that never empties. The city has changed since the '80s; the hustle hasn't.",
@@ -23,7 +20,8 @@ export const locations = [
     id: "leonida-keys",
     name: "Leonida Keys",
     short: "The Keys",
-    art: keys,
+    photo: photos["leonida-keys"],
+    art: photos["leonida-keys"].src,
     tone: "#30e3d0",
     kicker: "Islands strung on one long bridge",
     note: "Turquoise shallows, boat yards and bars at the end of the road. Jason works for drug runners down here.",
@@ -33,7 +31,8 @@ export const locations = [
     id: "grassrivers",
     name: "Grassrivers",
     short: "Grassrivers",
-    art: grassrivers,
+    photo: photos["grassrivers"],
+    art: photos["grassrivers"].src,
     tone: "#7fd3a0",
     kicker: "Sawgrass, airboats and things in the water",
     note: "Leonida's wetlands: a slow, wide river of grass where the roads give out and the airboats take over.",
@@ -43,7 +42,8 @@ export const locations = [
     id: "port-gellhorn",
     name: "Port Gellhorn",
     short: "Port Gellhorn",
-    art: portGellhorn,
+    photo: photos["port-gellhorn"],
+    art: photos["port-gellhorn"].src,
     tone: "#ff8b3d",
     kicker: "A port town past its best years",
     note: "Cranes, container stacks and motels with the vacancy sign always lit. Raul Bautista's corner of the map.",
@@ -53,7 +53,8 @@ export const locations = [
     id: "ambrosia",
     name: "Ambrosia",
     short: "Ambrosia",
-    art: ambrosia,
+    photo: photos["ambrosia"],
+    art: photos["ambrosia"].src,
     tone: "#ffcf7a",
     kicker: "Smokestacks over flat farmland",
     note: "An inland industrial town of refineries and long straight roads, where bikers and car-wash fundraisers share the same main street.",
@@ -63,7 +64,8 @@ export const locations = [
     id: "mount-kalaga",
     name: "Mount Kalaga",
     short: "Kalaga",
-    art: kalaga,
+    photo: photos["mount-kalaga"],
+    art: photos["mount-kalaga"].src,
     tone: "#a98bff",
     kicker: "A national park in the north",
     note: "Pine ridges, trails and hunting country around Mount Kalaga National Park. The quietest place in Leonida, for now.",

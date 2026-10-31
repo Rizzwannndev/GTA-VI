@@ -1,66 +1,70 @@
 /*
   Design tokens. Every colour, font, size and motion value the site uses lives
   here. Tailwind's @theme turns the --color-* and --font-* entries into
-  utilities (bg-ink, text-pink, font-display...) as well as plain CSS vars.
+  utilities as well as plain CSS vars.
+
+  The world: an official-game-site standard. True black, white type, colour
+  only from photography and the VI logo's sunset.
 */
 @theme {
-  /* Ground: Vice City after sundown */
-  --color-ink: #0c0820;
-  --color-ink-2: #170f35;
-  --color-ink-3: #24174d;
-  --color-dusk: #3a1f78;
+  /* Ground and surfaces */
+  --color-ink: #000000;
+  --color-surface: #121212;
+  --color-raised: #1c1c1c;
 
-  /* Sunset accents, sampled from the VI logo and the bay artwork */
-  --color-pink: #ff3d8b;
-  --color-magenta: #c2187f;
-  --color-orange: #ff8b3d;
-  --color-gold: #ffcf7a;
-  --color-teal: #30e3d0;
-  --color-sky: #4a6ee0;
+  /* Type: white, and a softer white for secondary copy (contrast >= 7:1) */
+  --color-paper: #ffffff;
+  --color-haze: #bdbdbd;
+  --color-fog: #8a8a8a;
 
-  /* Text, tinted toward the violet ground rather than neutral grey */
-  --color-paper: #f7eefb;
-  --color-haze: #c5b6e0;
-  --color-fog: #8f80b3;
+  /* The VI logo's sunset, sampled from the official mark. Used as light and
+     as the logo's own fill, never as text colour. */
+  --color-dusk: #4a3fb8;
+  --color-pink: #ff4f9a;
+  --color-orange: #ff9a52;
+  --color-gold: #ffd27a;
+  --color-teal: #3fd6c6;
 
-  --font-display: "Pricedown", "Barlow Condensed", Impact, sans-serif;
-  --font-body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-cond: "Barlow Condensed", "Barlow", system-ui, sans-serif;
+  --font-display: "Archivo Variable", "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Archivo Variable", "Archivo", "Helvetica Neue", Arial, sans-serif;
 }
 
 :root {
-  /* The logo's own gradient, used as light and fields, never as text fill */
-  --grad-sunset: linear-gradient(180deg, #4a6ee0 0%, #8a4fd0 34%, #ff4fa6 66%, #ff9b4a 100%);
-  --grad-horizon: linear-gradient(90deg, #ff3d8b 0%, #ff8b3d 50%, #ffcf7a 100%);
-  --glow-pink: 0 0 0.5em rgb(255 61 139 / 0.55), 0 0 1.6em rgb(255 61 139 / 0.35);
-  --glow-teal: 0 0 0.5em rgb(48 227 208 / 0.5), 0 0 1.4em rgb(48 227 208 / 0.3);
+  --grad-sunset: linear-gradient(180deg, #4a3fb8 0%, #9b4fd0 32%, #ff4f9a 64%, #ff9a52 100%);
+  --line: rgb(255 255 255 / 0.16);
+  --line-strong: rgb(255 255 255 / 0.4);
+  --scrim: linear-gradient(180deg, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 0.55) 55%, #000 100%);
 
-  /* Fluid type scale (minor-third steps, clamped for 320px to 2560px) */
+  /* Archivo's width axis carries the voice: wide for display, normal for text */
+  --wdth-display: 118;
+  --wdth-text: 100;
+  --wdth-tight: 82;
+
+  /* Fluid type scale, 320px to 2560px. Headings stop at 6rem. */
   --fs-micro: clamp(0.75rem, 0.72rem + 0.12vw, 0.82rem);
   --fs-small: clamp(0.875rem, 0.84rem + 0.15vw, 0.95rem);
   --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
-  --fs-lead: clamp(1.125rem, 1.04rem + 0.45vw, 1.45rem);
-  --fs-h4: clamp(1.4rem, 1.2rem + 0.9vw, 2rem);
-  --fs-h3: clamp(1.9rem, 1.5rem + 1.8vw, 3.2rem);
-  --fs-h2: clamp(2.6rem, 1.8rem + 4vw, 6rem);
-  --fs-h1: clamp(3.2rem, 2rem + 7vw, 9rem);
-  --fs-mega: clamp(4.5rem, 2rem + 14vw, 17rem);
+  --fs-lead: clamp(1.125rem, 1.02rem + 0.5vw, 1.5rem);
+  --fs-h4: clamp(1.25rem, 1.1rem + 0.7vw, 1.75rem);
+  --fs-h3: clamp(1.6rem, 1.25rem + 1.6vw, 2.75rem);
+  --fs-h2: clamp(2.2rem, 1.4rem + 3.6vw, 5rem);
+  --fs-h1: clamp(2.8rem, 1.6rem + 5.4vw, 6rem);
+  --fs-mega: clamp(4rem, 1.5rem + 13vw, 16rem);
 
   /* Spacing rhythm */
-  --gutter: clamp(1rem, 0.6rem + 2.2vw, 3rem);
-  --section-y: clamp(5rem, 3rem + 9vw, 12rem);
+  --gutter: clamp(1rem, 0.5rem + 2.4vw, 3.5rem);
+  --section-y: clamp(5rem, 3rem + 8vw, 11rem);
   --measure: 62ch;
-  --header-h: clamp(64px, 56px + 2vw, 88px);
+  --header-h: clamp(64px, 54px + 2vw, 92px);
 
-  /* Radii: sharp for type-led surfaces, a soft corner only on media */
-  --radius-media: 6px;
+  --radius-media: 2px;
   --radius-pill: 999px;
 
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
-  --dur-fast: 180ms;
-  --dur-med: 420ms;
+  --dur-fast: 200ms;
+  --dur-med: 450ms;
 
   /* Stacking order, one list so layers never fight */
   --z-content: 1;

@@ -3,9 +3,11 @@
 // lazy loader (also used to preload the page during the transition).
 import { lazy } from "react";
 import { art } from "../assets/images/art";
-import viceCity from "../assets/placeholders/location-vice-city.svg";
-import muscleCar from "../assets/placeholders/vehicle-muscle-car.svg";
-import kalaga from "../assets/placeholders/location-mount-kalaga.svg";
+import { photos } from "../assets/photos/photos";
+
+const leonidaPreview = photos["vice-beach"].small;
+const vehiclesPreview = photos["sports-coupe"].small;
+const editionsPreview = photos["vice-cardozo"].small;
 
 const yt = (id) => `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
 
@@ -36,12 +38,12 @@ const route = (key, path, name, title, description, preview) => ({
 export const routes = [
   route("home", "/", "Home", "Grand Theft Auto VI fan site", "An unofficial guide to Grand Theft Auto VI: trailers, characters, Leonida and the November 19, 2026 launch.", art.bay.src),
   route("characters", "/characters", "Characters", "Characters", "Jason Duval, Lucia Caminos and the people of Leonida, as introduced by Rockstar Games.", art.duo.src),
-  route("leonida", "/leonida", "Leonida", "The map of Leonida", "An interactive fan map of Leonida: Vice City, the Keys, Grassrivers, Port Gellhorn, Ambrosia and Mount Kalaga.", viceCity),
-  route("vehicles", "/vehicles", "Vehicles", "Vehicles", "A fan garage of the cars, boats and bikes of Leonida.", muscleCar),
+  route("leonida", "/leonida", "Leonida", "The map of Leonida", "An interactive fan map of Leonida: Vice City, the Keys, Grassrivers, Port Gellhorn, Ambrosia and Mount Kalaga.", leonidaPreview),
+  route("vehicles", "/vehicles", "Vehicles", "Vehicles", "A fan garage of the cars, boats and bikes of Leonida.", vehiclesPreview),
   route("gallery", "/gallery", "Gallery", "Gallery", "Artwork and stills from around Leonida.", art.boobie.src),
   route("trailers", "/trailers", "Trailers", "Official trailers", "Every official Grand Theft Auto VI trailer and video from Rockstar Games.", yt("rz1B4B2yBZY")),
   route("news", "/news", "News", "News", "A timeline of official Grand Theft Auto VI announcements.", yt("EiQEBYDox_k")),
-  route("editions", "/editions", "Editions", "Editions and pre-order", "Grand Theft Auto VI editions and where to pre-order.", kalaga),
+  route("editions", "/editions", "Editions", "Editions and pre-order", "Grand Theft Auto VI editions and where to pre-order.", editionsPreview),
   route("about", "/about", "About", "About and contact", "About this fan project, and how to get in touch.", yt("VQRLujxTm3c")),
 ];
 

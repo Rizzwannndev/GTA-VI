@@ -2,8 +2,11 @@ import { useRef } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "../../animations/gsap";
 import { parallax, revealText } from "../../animations/motion";
 import { leads } from "../../data/characters";
+import { photos } from "../../assets/photos/photos";
 import Picture from "../ui/Picture";
 import Button from "../ui/Button";
+
+const BACKDROPS = { lucia: "vice-strip", jason: "leonida-keys" };
 
 // Lucia and Jason as two panels that open outward from the seam between them,
 // like double doors; each portrait is uncovered with a clip-path wipe.
@@ -43,7 +46,9 @@ export default function Duo() {
       <div className="duo__panels">
         {leads.map((c) => (
           <article key={c.id} className={`duo__panel duo__panel--${c.id}`} style={{ "--tint": c.tint }}>
-            <div className="duo__field" aria-hidden="true" />
+            <div className="duo__field" aria-hidden="true">
+              <Picture image={photos[BACKDROPS[c.id]]} alt="" imgClassName="duo__field-img" sizes="(max-width: 900px) 100vw, 50vw" />
+            </div>
             <div className="duo__figure">
               <Picture image={c.image} alt={c.name} imgClassName="duo__portrait" sizes="(max-width: 900px) 70vw, 30vw" />
             </div>

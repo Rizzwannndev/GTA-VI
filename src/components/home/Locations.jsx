@@ -3,8 +3,9 @@ import { Link } from "react-router";
 import { gsap, useGSAP, MQ } from "../../animations/gsap";
 import { revealText } from "../../animations/motion";
 import { locations } from "../../data/locations";
+import Picture from "../ui/Picture";
 
-// "Greetings from" postcards for the six regions. Desktop: the section pins
+// The six regions as full-height photo panels. Desktop: the section pins
 // and the reel scrolls sideways with the page. Phones and reduced motion: a
 // native swipeable row with scroll snapping.
 export default function Locations() {
@@ -62,26 +63,24 @@ export default function Locations() {
       <div className="locations__pin">
         <div className="wrap locations__head">
           <h2 id="locations-title" className="locations__title">
-            Greetings from Leonida
+            Six regions, one state
           </h2>
-          <p className="locations__hint">Six regions named by Rockstar so far. Fan notes, placeholder art.</p>
+          <p className="locations__hint">Region names are Rockstar's. Photos are real Florida places that match each one.</p>
         </div>
         <div className="locations__viewport" data-cursor="drag">
           <ol ref={trackRef} className="locations__track">
             {locations.map((loc) => (
-              <li key={loc.id} className="postcard" style={{ "--tone": loc.tone }}>
+              <li key={loc.id} className="postcard">
                 <Link to={`/leonida#${loc.id}`} className="postcard__link" data-cursor="view">
                   <div className="postcard__art">
-                    <img src={loc.art} alt="" width="1600" height="1000" loading="lazy" decoding="async" />
+                    <Picture image={loc.photo} alt="" sizes="(max-width: 900px) 85vw, 42vw" />
                   </div>
                   <div className="postcard__body">
-                    <p className="postcard__greeting">Greetings from</p>
-                    <h3 className="postcard__name" style={{ "--art": `url(${loc.art})` }}>
-                      {loc.name}
-                    </h3>
+                    <h3 className="postcard__name">{loc.name}</h3>
                     <p className="postcard__kicker">{loc.kicker}</p>
                   </div>
                 </Link>
+                <p className="postcard__credit">Photo: {loc.photo.credit}</p>
               </li>
             ))}
           </ol>
