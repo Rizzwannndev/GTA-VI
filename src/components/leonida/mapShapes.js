@@ -12,10 +12,12 @@ export const regionShapes = {
     label: [500, 168],
   },
   ambrosia: { d: "M420 300 L560 250 L690 230 L700 260 L715 360 L640 400 L560 420 L470 470 L430 380 Z", label: [570, 335] },
-  grassrivers: { d: "M470 470 L560 420 L640 400 L650 560 L640 700 L600 730 L560 640 L520 560 Z", label: [560, 600] },
+  grassrivers: { d: "M470 470 L560 420 L640 400 L650 560 L640 700 L600 730 L560 640 L520 560 Z", label: [556, 528] },
   "vice-city": {
     d: "M640 400 L715 360 L740 500 L750 600 L730 690 L690 740 L640 760 L600 730 L640 700 L650 560 Z",
-    label: [700, 520],
+    label: [700, 505],
+    // The strip is narrow, so the name stacks on two lines.
+    stack: true,
     city: [722, 590],
   },
   "leonida-keys": {

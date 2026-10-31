@@ -56,7 +56,7 @@ export default function Editions() {
                 <span className="tier__glow" aria-hidden="true" />
                 {e.featured && <p className="tier__flag">Most extras</p>}
                 <h3 className="tier__name">{e.name}</h3>
-                <p className="tier__price tabular">{e.price}</p>
+                <p className={`tier__price tabular${e.price.startsWith("$") ? "" : " tier__price--word"}`}>{e.price}</p>
                 <p className="tier__for">{e.bestFor}</p>
                 <ul className="tier__list">
                   {e.includes.map((inc) => (

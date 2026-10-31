@@ -55,7 +55,13 @@ export default function LeonidaMap({ activeId, hoverId, onHover, onSelect }) {
             <path className="map__region-shape" d={shape.d} />
             {shape.city && <circle className="map__city" cx={shape.city[0]} cy={shape.city[1]} r="6" />}
             <text className="map__label" x={shape.label[0]} y={shape.label[1]} textAnchor="middle">
-              {loc.short}
+              {shape.stack
+                ? loc.short.split(" ").map((word, i) => (
+                    <tspan key={word} x={shape.label[0]} dy={i ? "1.1em" : 0}>
+                      {word}
+                    </tspan>
+                  ))
+                : loc.short}
             </text>
           </g>
         );
