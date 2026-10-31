@@ -35,6 +35,14 @@ export default function Menu({ open, onClose }) {
   const currentKey = navRoutes.find((r) => r.path === pathname)?.key ?? null;
   const shownKey = hover ?? currentKey ?? navRoutes[0].key;
 
+  // The ambient light keeps only two pictures mounted: the one fading in
+  // and the one beneath it. Each change gets a fresh id so the new layer
+  // always mounts on top and fades in over the last.
+  const [ambient, setAmbient] = useState(() => [{ key: shownKey, id: 0 }]);
+  const top = ambient[ambient.length - 1];
+  if (top.key !== shownKey) setAmbient([top, { key: shownKey, id: top.id + 1 }]);
+  const previewOf = (key) => navRoutes.find((r) => r.key === key)?.preview;
+
   useEffect(() => {
     if (!visible) return;
     lockScroll();
@@ -145,9 +153,11 @@ export default function Menu({ open, onClose }) {
 
       {/* Ambient light: the shown page's screenshot, blurred and dimmed. */}
       <div className="menu__ambient" aria-hidden="true">
-        {navRoutes.map((r) => (
-          <img key={r.key} src={r.preview} alt="" className={`menu__ambient-img ${shownKey === r.key ? "is-shown" : ""}`} decoding="async" />
-        ))}
+        <div className="menu__ambient-wash">
+          {ambient.map((a) => (
+            <img key={a.id} src={previewOf(a.key)} alt="" className="menu__ambient-img" decoding="async" />
+          ))}
+        </div>
         <span className="menu__glow" />
       </div>
 

@@ -668,6 +668,7 @@
 }
 .duo__panel {
   position: relative;
+  container-type: inline-size;
   min-height: clamp(600px, 96svh, 1040px);
   overflow: hidden;
   isolation: isolate;
@@ -720,15 +721,26 @@
 }
 .duo__text {
   position: relative;
-  width: min(34rem, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
   padding: clamp(1.5rem, 3vw, 3rem) var(--gutter);
 }
-.duo__panel--jason .duo__text {
-  margin-left: auto;
+.duo__text > :not(.duo__name) {
+  max-width: 30rem;
 }
-/* One line, always: the name scales with the panel, never wraps. */
+/* Jason's side mirrors Lucia's: the block sits against the right edge. */
+.duo__panel--jason .duo__text {
+  align-items: flex-end;
+}
+.duo__panel--jason .duo__text > :not(.duo__name) {
+  width: 100%;
+}
+/* One line, always: sized from the panel's own width (the name is about
+   4.2em wide), so it can never run past the edge on any screen. */
 .duo__name {
-  font-size: clamp(3.5rem, 8.2vw, 9rem);
+  font-size: min(9rem, 18cqi);
   white-space: nowrap;
   line-height: 0.9;
 }
@@ -953,9 +965,6 @@
   }
   .duo__panel {
     min-height: clamp(560px, 100svh, 780px);
-  }
-  .duo__name {
-    font-size: clamp(3.5rem, 19vw, 7rem);
   }
   .stats__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));

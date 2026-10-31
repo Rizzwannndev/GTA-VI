@@ -459,6 +459,8 @@
 }
 /* Ambient light: the shown page's screenshot, heavily blurred and dimmed,
    with the VI sunset glowing in from the corners. */
+/* One blur for the whole layer instead of one per picture: a single
+   compositing surface keeps the menu light on any graphics card. */
 .menu__ambient {
   position: absolute;
   inset: 0;
@@ -466,18 +468,23 @@
   pointer-events: none;
   visibility: hidden;
 }
+.menu__ambient-wash {
+  position: absolute;
+  inset: -8%;
+  filter: blur(36px) saturate(1.2) brightness(0.42);
+}
 .menu__ambient-img {
   position: absolute;
-  inset: -6%;
-  width: 112%;
-  height: 112%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  opacity: 0;
-  filter: blur(42px) saturate(1.25) brightness(0.42);
-  transition: opacity 0.9s ease;
+  animation: ambient-in 0.9s ease both;
 }
-.menu__ambient-img.is-shown {
-  opacity: 1;
+@keyframes ambient-in {
+  from {
+    opacity: 0;
+  }
 }
 .menu__glow {
   position: absolute;
@@ -502,7 +509,6 @@
   box-shadow: 0 30px 80px rgb(0 0 0 / 0.55);
   pointer-events: none;
   visibility: hidden;
-  will-change: transform;
 }
 .menu__card-img {
   position: absolute;
@@ -589,9 +595,9 @@
   color: #fff;
 }
 .menu__list.is-hovering .menu__item:not(.is-hovered) .menu__char {
-  color: transparent;
+  color: rgb(255 255 255 / 0.12);
   text-shadow: none;
-  -webkit-text-stroke-color: rgb(255 255 255 / 0.55);
+  -webkit-text-stroke-color: rgb(255 255 255 / 0.85);
 }
 .menu__link[aria-current="page"] .menu__char {
   color: #ff4f9a;
