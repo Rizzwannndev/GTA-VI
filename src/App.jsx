@@ -2,6 +2,7 @@ import { Suspense, useEffect } from "react";
 import { Routes, Route } from "react-router";
 import { initSmoothScroll, destroySmoothScroll } from "./animations/smooth";
 import { stage } from "./animations/stage";
+import { initMusic } from "./audio/music";
 import { useScrollRefresh } from "./hooks/useScrollRefresh";
 import { VideoProvider } from "./context/VideoContext";
 import { routes, notFoundRoute } from "./data/routes";
@@ -16,7 +17,11 @@ function App() {
   useEffect(() => {
     initSmoothScroll();
     stage.set({ revealed: true });
-    return () => destroySmoothScroll();
+    const stopMusic = initMusic();
+    return () => {
+      stopMusic();
+      destroySmoothScroll();
+    };
   }, []);
 
   const NotFound = notFoundRoute.Component;

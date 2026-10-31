@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
@@ -6,6 +6,13 @@ const FOCUSABLE =
 // Keeps Tab / Shift+Tab inside `ref` while `active`, closes on Escape, and
 // hands focus back to whatever was focused before when it deactivates.
 export function useFocusTrap(ref, active, { onEscape, initialFocus } = {}) {
+  // Latest Esc handler without re-running the trap (which would steal focus)
+  // every time the caller passes a fresh function.
+  const escRef = useRef(onEscape);
+  useEffect(() => {
+    escRef.current = onEscape;
+  });
+
   useEffect(() => {
     if (!active || !ref.current) return;
     const root = ref.current;
@@ -20,7 +27,7 @@ export function useFocusTrap(ref, active, { onEscape, initialFocus } = {}) {
     const onKey = (e) => {
       if (e.key === "Escape") {
         e.preventDefault();
-        onEscape?.();
+        escRef.current?.();
         return;
       }
       if (e.key !== "Tab") return;
@@ -41,5 +48,5 @@ export function useFocusTrap(ref, active, { onEscape, initialFocus } = {}) {
       document.removeEventListener("keydown", onKey);
       if (previous instanceof HTMLElement) previous.focus({ preventScroll: true });
     };
-  }, [active, ref, onEscape, initialFocus]);
+  }, [active, ref, initialFocus]);
 }
