@@ -20,6 +20,9 @@ export default function Preloader({ handoff, onReveal, onDone }) {
       const reduce = prefersReducedMotion();
       let cancelled = false;
       lockScroll();
+      // Nothing behind the loading screen can take focus until it leaves.
+      const behind = document.querySelectorAll(".site-header, #main, .footer");
+      behind.forEach((el) => (el.inert = true));
 
       if (!reduce) {
         gsap
@@ -48,6 +51,7 @@ export default function Preloader({ handoff, onReveal, onDone }) {
 
       return () => {
         cancelled = true;
+        behind.forEach((el) => (el.inert = false));
         unlockScroll();
       };
     },

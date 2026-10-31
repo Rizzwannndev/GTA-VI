@@ -23,8 +23,14 @@
   transition: text-decoration-color var(--dur-fast);
 }
 .credit-line a:hover,
-.text-link:hover {
+.credit-line a:focus-visible,
+.text-link:hover,
+.text-link:focus-visible {
   text-decoration-color: currentColor;
+}
+.text-link:active,
+.credit-line a:active {
+  opacity: 0.7;
 }
 
 /* ---------- Icons ---------- */
@@ -179,11 +185,18 @@
   font-size: var(--fs-small);
   font-weight: 600;
   color: var(--color-haze);
-  transition: background-color var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+  transition: background-color var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast);
 }
 .chip:hover {
   border-color: var(--line-strong);
   color: var(--color-paper);
+}
+.chip:focus-visible {
+  border-color: var(--color-paper);
+  color: var(--color-paper);
+}
+.chip:active {
+  transform: scale(0.97);
 }
 .chip.is-active {
   background: var(--color-paper);
@@ -284,7 +297,8 @@
 .menu-btn__line:last-child {
   transform: translateY(3px);
 }
-.menu-btn:hover .menu-btn__lines {
+.menu-btn:hover .menu-btn__lines,
+.menu-btn:focus-visible .menu-btn__lines {
   border-color: var(--color-paper);
 }
 .menu-btn:active .menu-btn__lines {
@@ -335,8 +349,15 @@
   color: var(--color-haze);
   transition: color 0.3s ease;
 }
-.eq:hover .eq__label {
+.eq:hover .eq__label,
+.eq:focus-visible .eq__label {
   color: var(--color-paper);
+}
+.eq:active .eq__bars {
+  transform: scale(0.85);
+}
+.eq__bars {
+  transition: transform 0.2s ease;
 }
 @keyframes eq {
   0% {
